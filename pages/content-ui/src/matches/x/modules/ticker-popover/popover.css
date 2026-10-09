@@ -1,0 +1,357 @@
+/* --------------------------------------------------------------------------
+   TICKER POPOVER
+
+   The hover card and the token avatar it shares with the tweet pills. Plain CSS
+   with the defensive `!important`s it needs on X, where it sits in X's own DOM.
+   The card on any other site loads the same file into its shadow root, where
+   nothing on the page can reach it and the `!important`s are merely harmless.
+   -------------------------------------------------------------------------- */
+
+.catalyst-tweet-market-avatar {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.22);
+  object-fit: cover;
+  color: inherit;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.catalyst-tweet-market-avatar-wrap {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+
+.catalyst-tweet-market-chain-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: inline-flex;
+  width: 13px;
+  height: 13px;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #16181c;
+  border-radius: 50%;
+  background: #24272d;
+}
+
+.catalyst-tweet-market-chain-badge .catalyst-chain-mark {
+  width: 8px;
+  height: 8px;
+}
+
+/* ---- The hover card ------------------------------------------------------ */
+
+.catalyst-tweet-market-popover {
+  position: fixed;
+  z-index: 2147483647;
+  box-sizing: border-box;
+  width: 336px;
+  max-width: calc(100vw - 24px);
+  max-height: min(520px, calc(100vh - 24px));
+  overflow: auto;
+  padding: 16px;
+  border: 1px solid;
+  border-radius: 18px;
+  box-shadow:
+    0 18px 48px rgba(0, 0, 0, 0.28),
+    0 3px 10px rgba(0, 0, 0, 0.12);
+  font-family:
+    TwitterChirp,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.35;
+  pointer-events: auto;
+}
+
+.catalyst-tweet-market-popover.is-dark {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: #17191d;
+  color: #f2f4f5;
+}
+
+.catalyst-tweet-market-popover.is-light {
+  border-color: rgba(15, 20, 25, 0.12);
+  background: #fff;
+  color: #0f1419;
+  box-shadow:
+    0 18px 48px rgba(15, 20, 25, 0.18),
+    0 3px 10px rgba(15, 20, 25, 0.08);
+}
+
+.catalyst-tweet-market-popover-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.catalyst-tweet-market-avatar-large {
+  width: 42px;
+  height: 42px;
+  font-size: 12px;
+}
+
+/* The title is a button: it is the way into the full read. */
+.catalyst-tweet-market-heading {
+  appearance: none !important;
+  display: flex !important;
+  flex: 1 1 auto;
+  flex-direction: column;
+  align-items: flex-start !important;
+  min-width: 0;
+  gap: 2px;
+  padding: 2px 6px !important;
+  margin: 0 0 0 -6px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  font: inherit !important;
+  text-align: left !important;
+  cursor: pointer !important;
+}
+
+.catalyst-tweet-market-heading:hover {
+  background: rgba(128, 128, 128, 0.14) !important;
+}
+
+.catalyst-tweet-market-heading strong {
+  max-width: 100%;
+  overflow: hidden;
+  font-size: 17px;
+  font-weight: 750;
+  letter-spacing: -0.02em;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalyst-tweet-market-heading > span {
+  max-width: 100%;
+  overflow: hidden;
+  color: #8b9299;
+  font-size: 12px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalyst-tweet-market-close {
+  appearance: none !important;
+  display: inline-flex !important;
+  flex: 0 0 auto;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  border-radius: 50% !important;
+  background: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  font: inherit !important;
+  font-size: 22px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  opacity: 0.62;
+}
+
+.catalyst-tweet-market-close:hover {
+  background: rgba(128, 128, 128, 0.16) !important;
+  opacity: 1;
+}
+
+.catalyst-tweet-market-price-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.catalyst-tweet-market-price-row > div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.catalyst-tweet-market-price-row > div > span,
+.catalyst-tweet-market-stats > div > span {
+  color: #858c93;
+  font-size: 11px;
+}
+
+.catalyst-tweet-market-price-row > div > strong {
+  font-size: 26px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 750;
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.catalyst-tweet-market-change {
+  padding-bottom: 2px;
+  color: #22c777;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+.catalyst-tweet-market-change.is-down {
+  color: #f45b69;
+}
+
+.catalyst-tweet-market-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 14px;
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+}
+
+.catalyst-tweet-market-stats > div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.catalyst-tweet-market-stats > div > strong {
+  overflow: hidden;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 650;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalyst-tweet-market-loading {
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #858c93;
+  font-size: 13px;
+  text-align: center;
+}
+
+.catalyst-tweet-market-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.catalyst-tweet-market-actions button {
+  appearance: none !important;
+  min-width: 0 !important;
+  height: 40px !important;
+  padding: 0 10px !important;
+  border: 1px solid rgba(128, 128, 128, 0.28) !important;
+  border-radius: 10px !important;
+  background: rgba(128, 128, 128, 0.12) !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  font: inherit !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  cursor: pointer !important;
+  /* X sets text-align on buttons, so a button of ours does not centre itself. */
+  text-align: center !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalyst-tweet-market-actions button:hover:not(:disabled) {
+  border-color: rgba(46, 204, 113, 0.55) !important;
+  background: rgba(46, 204, 113, 0.12) !important;
+}
+
+.catalyst-tweet-market-actions button.is-trade {
+  border-color: #20bd70 !important;
+  background: #20bd70 !important;
+  color: #07150d !important;
+}
+
+.catalyst-tweet-market-actions button.is-trade:hover:not(:disabled) {
+  border-color: #32d483 !important;
+  background: #32d483 !important;
+}
+
+.catalyst-tweet-market-actions button:disabled {
+  cursor: not-allowed !important;
+  opacity: 0.42;
+}
+
+/* Where there is no panel to open, the heading is a label, not a button. */
+.catalyst-tweet-market-heading.is-static {
+  cursor: default !important;
+}
+
+.catalyst-tweet-market-heading.is-static:hover {
+  background: transparent !important;
+}
+
+.catalyst-tweet-market-actions.is-single {
+  grid-template-columns: 1fr;
+}
+
+/* The card on other sites: room for the chart to read. Placement measures the
+   card, so this width is the only place it is set. */
+.catalyst-tweet-market-popover.is-wide {
+  width: 380px;
+}
+
+/* A day of hourly candles, between the price and the figures under it. The
+   card around a chart is tighter; where it is still taller than the room above
+   and below its word, it opens beside the word instead (position.ts). */
+.catalyst-ticker-popover-chart {
+  margin: 10px -4px 0;
+  min-height: 156px;
+}
+
+.catalyst-tweet-market-popover.has-chart .catalyst-tweet-market-price-row {
+  margin-top: 14px;
+}
+
+.catalyst-tweet-market-popover.has-chart .catalyst-tweet-market-stats {
+  gap: 8px 14px;
+  margin-top: 12px;
+  padding-top: 12px;
+}
+
+.catalyst-tweet-market-popover.has-chart .catalyst-tweet-market-actions {
+  margin-top: 14px;
+}
+
+.catalyst-ticker-popover-chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 156px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background: rgba(128, 128, 128, 0.08);
+  color: #858c93;
+  font-size: 12px;
+}

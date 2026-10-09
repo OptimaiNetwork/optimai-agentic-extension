@@ -1,0 +1,65 @@
+/* --------------------------------------------------------------------------
+   BADGE
+
+   The shadow root of each `catalyst-badge`, after the shared pill.css and the
+   avatar rules in popover.css. The pill is X's; this file only sets it into a
+   line of prose: smaller than on a tweet, where it has a row of its own, so a
+   paragraph keeps its line spacing. Nothing on the page reaches in here, and
+   nothing it inherits (a link's colour, a heading's weight) reaches the pill.
+   -------------------------------------------------------------------------- */
+
+:host {
+  all: initial;
+  display: inline-block;
+  margin: 0 1px 0 4px;
+  vertical-align: middle;
+  line-height: 1;
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+/* Set from the page's own background when the badge is made. */
+:host(.is-dark) {
+  color: #e7e9ea;
+}
+
+:host(.is-light) {
+  color: #0f1419;
+}
+
+.catalyst-tweet-market-pill {
+  gap: 5px !important;
+  height: 24px !important;
+  padding: 0 9px 0 3px !important;
+  font-size: 13px !important;
+}
+
+/* The card is open on this badge. */
+:host(.is-active) .catalyst-tweet-market-pill {
+  background: rgba(128, 128, 128, 0.28) !important;
+}
+
+.catalyst-tweet-market-avatar {
+  width: 18px;
+  height: 18px;
+  font-size: 7px;
+}
+
+.catalyst-tweet-market-chain-badge {
+  right: -2px;
+  bottom: -2px;
+  width: 10px;
+  height: 10px;
+  border-width: 1px;
+}
+
+.catalyst-tweet-market-chain-badge .catalyst-chain-mark {
+  width: 6px;
+  height: 6px;
+}

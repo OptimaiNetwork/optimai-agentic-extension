@@ -1,0 +1,263 @@
+{
+  "data": {
+    "search_by_raw_query": {
+      "search_timeline": {
+        "timeline": {
+          "instructions": [
+            {
+              "type": "TimelineAddEntries",
+              "entries": [
+                {
+                  "content": {
+                    "__typename": "TimelineTimelineItem",
+                    "clientEventInfo": {
+                      "component": "cashtag_chart",
+                      "element": "smart_tag"
+                    },
+                    "entryType": "TimelineTimelineItem",
+                    "itemContent": {
+                      "__typename": "TimelineSmartTag",
+                      "active": true,
+                      "itemType": "TimelineSmartTag",
+                      "restId": "NVDA",
+                      "supportsOhlc": true,
+                      "tradablePlatforms": []
+                    }
+                  },
+                  "entryId": "smarttag-NVDA",
+                  "sortIndex": "10000"
+                },
+                {
+                  "entryId": "tweet-1",
+                  "sortIndex": "9999",
+                  "content": {
+                    "entryType": "TimelineTimelineItem",
+                    "itemContent": {
+                      "itemType": "TimelineTweet",
+                      "tweet_results": {
+                        "result": {
+                          "__typename": "Tweet",
+                          "rest_id": "1",
+                          "views": {
+                            "count": "9100",
+                            "state": "EnabledWithCount"
+                          },
+                          "core": {
+                            "user_results": {
+                              "result": {
+                                "__typename": "User",
+                                "is_blue_verified": true,
+                                "core": {
+                                  "created_at": "Tue May 12 08:01:58 +0000 2026",
+                                  "name": "Analyst One",
+                                  "screen_name": "analyst_one"
+                                },
+                                "relationship_counts": {
+                                  "followers": 41200,
+                                  "following": 26
+                                },
+                                "verification": {
+                                  "verified": false
+                                }
+                              }
+                            }
+                          },
+                          "legacy": {
+                            "created_at": "Sat Sep 19 06:43:11 +0000 2026",
+                            "id_str": "1",
+                            "conversation_id_str": "1",
+                            "full_text": "$NVDA guidance raised after the datacenter print.",
+                            "lang": "en",
+                            "is_quote_status": false,
+                            "entities": {
+                              "symbols": [
+                                {
+                                  "indices": [
+                                    0,
+                                    5
+                                  ],
+                                  "tag": {
+                                    "info": {
+                                      "info": {
+                                        "name": "NVIDIA Corp",
+                                        "ticker": "NVDA"
+                                      }
+                                    }
+                                  },
+                                  "text": "NVDA"
+                                }
+                              ]
+                            },
+                            "favorite_count": 812,
+                            "retweet_count": 143,
+                            "reply_count": 57,
+                            "quote_count": 12,
+                            "bookmark_count": 64
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "entryId": "tweet-2",
+                  "sortIndex": "9998",
+                  "content": {
+                    "entryType": "TimelineTimelineItem",
+                    "itemContent": {
+                      "itemType": "TimelineTweet",
+                      "tweet_results": {
+                        "result": {
+                          "__typename": "Tweet",
+                          "rest_id": "2",
+                          "views": {
+                            "count": "31",
+                            "state": "EnabledWithCount"
+                          },
+                          "core": {
+                            "user_results": {
+                              "result": {
+                                "__typename": "User",
+                                "is_blue_verified": false,
+                                "core": {
+                                  "created_at": "Tue May 12 08:01:58 +0000 2026",
+                                  "name": "hype",
+                                  "screen_name": "hype_acct"
+                                },
+                                "relationship_counts": {
+                                  "followers": 180,
+                                  "following": 26
+                                },
+                                "verification": {
+                                  "verified": false
+                                }
+                              }
+                            }
+                          },
+                          "legacy": {
+                            "created_at": "Sat Sep 19 06:12:00 +0000 2026",
+                            "id_str": "2",
+                            "conversation_id_str": "2",
+                            "full_text": "$NVDA to the moon buy now before it runs",
+                            "lang": "en",
+                            "is_quote_status": false,
+                            "entities": {
+                              "symbols": [
+                                {
+                                  "indices": [
+                                    0,
+                                    5
+                                  ],
+                                  "tag": {
+                                    "info": {
+                                      "info": {
+                                        "name": "NVIDIA Corp",
+                                        "ticker": "NVDA"
+                                      }
+                                    }
+                                  },
+                                  "text": "NVDA"
+                                }
+                              ]
+                            },
+                            "favorite_count": 2,
+                            "retweet_count": 0,
+                            "reply_count": 0,
+                            "quote_count": 0,
+                            "bookmark_count": 0
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "entryId": "tweet-3",
+                  "sortIndex": "9997",
+                  "content": {
+                    "entryType": "TimelineTimelineItem",
+                    "itemContent": {
+                      "itemType": "TimelineTweet",
+                      "tweet_results": {
+                        "result": {
+                          "__typename": "Tweet",
+                          "rest_id": "3",
+                          "views": {
+                            "count": "1400",
+                            "state": "EnabledWithCount"
+                          },
+                          "core": {
+                            "user_results": {
+                              "result": {
+                                "__typename": "User",
+                                "is_blue_verified": false,
+                                "core": {
+                                  "created_at": "Tue May 12 08:01:58 +0000 2026",
+                                  "name": "Desk Notes",
+                                  "screen_name": "desk_notes"
+                                },
+                                "relationship_counts": {
+                                  "followers": 8800,
+                                  "following": 26
+                                },
+                                "verification": {
+                                  "verified": false
+                                }
+                              }
+                            }
+                          },
+                          "legacy": {
+                            "created_at": "Sat Sep 19 05:30:00 +0000 2026",
+                            "id_str": "3",
+                            "conversation_id_str": "3",
+                            "full_text": "$TSLA delivery numbers land Wednesday.",
+                            "lang": "en",
+                            "is_quote_status": false,
+                            "entities": {
+                              "symbols": [
+                                {
+                                  "indices": [
+                                    0,
+                                    5
+                                  ],
+                                  "tag": {
+                                    "info": {
+                                      "info": {
+                                        "name": "Tesla Inc",
+                                        "ticker": "TSLA"
+                                      }
+                                    }
+                                  },
+                                  "text": "TSLA"
+                                }
+                              ]
+                            },
+                            "favorite_count": 94,
+                            "retweet_count": 18,
+                            "reply_count": 6,
+                            "quote_count": 1,
+                            "bookmark_count": 9
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                {
+                  "content": {
+                    "__typename": "TimelineTimelineCursor",
+                    "cursorType": "Top",
+                    "entryType": "TimelineTimelineCursor",
+                    "value": "SYNTHETIC_CURSOR_TOP_1"
+                  },
+                  "entryId": "cursor-top-9223372036854775807",
+                  "sortIndex": "9223372036854775807"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}

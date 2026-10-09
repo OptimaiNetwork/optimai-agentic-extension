@@ -1,0 +1,89 @@
+{
+  "data": {
+    "finance_asset_data": {
+      "asset": {
+        "ticker": "NVDA",
+        "name": "NVIDIA Corp",
+        "logo_url": "https://abs.twimg.com/finance/v1/stub.png",
+        "quote": {
+          "as_of_timestamp_ms": 0,
+          "change_24h_percent": 0,
+          "market_cap": {
+            "currency_code": "USD",
+            "nanos": 41015625,
+            "units": "5356706910564"
+          },
+          "price": {
+            "currency_code": "USD",
+            "nanos": 270000000,
+            "units": "222"
+          }
+        },
+        "stock": {
+          "currency": "USD",
+          "exchange": "XNAS",
+          "exchange_short_name": "NASDAQ"
+        }
+      }
+    },
+    "finance_chart_data": {
+      "data_points": [
+        {
+          "open": {
+            "currency_code": "USD",
+            "nanos": 349999999,
+            "units": "219"
+          },
+          "price": {
+            "currency_code": "USD",
+            "nanos": 580000000,
+            "units": "218"
+          },
+          "timestamp": 0,
+          "volume": 0
+        },
+        {
+          "open": {
+            "currency_code": "USD",
+            "nanos": 349999999,
+            "units": "219"
+          },
+          "price": {
+            "currency_code": "USD",
+            "nanos": 580000000,
+            "units": "218"
+          },
+          "timestamp": 0,
+          "volume": 0
+        },
+        {
+          "open": {
+            "currency_code": "USD",
+            "nanos": 349999999,
+            "units": "219"
+          },
+          "price": {
+            "currency_code": "USD",
+            "nanos": 580000000,
+            "units": "218"
+          },
+          "timestamp": 0,
+          "volume": 0
+        }
+      ],
+      "sessions": [
+        {
+          "end_timestamp_ms": "1789761600000",
+          "session_type": "REGULAR",
+          "start_timestamp_ms": "1789738200000"
+        },
+        {
+          "end_timestamp_ms": "1789776000000",
+          "session_type": "POST_MARKET",
+          "start_timestamp_ms": "1789761600000"
+        }
+      ],
+      "gaps": []
+    }
+  }
+}

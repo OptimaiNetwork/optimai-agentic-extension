@@ -1,0 +1,164 @@
+/* Ensure DM scroller still works properly */
+[data-testid='DmScrollerContainer'],
+[data-testid='DmActivityContainer'] {
+  padding-bottom: 0 !important;
+}
+
+/* Ensure our DM input doesn't interfere with existing DM composer */
+[data-testid='dmComposerContainer'],
+[data-testid='dmComposer'] {
+  position: relative !important;
+  z-index: 999 !important;
+}
+
+/* Message check button container positioning */
+.catalyst-dm-check-container {
+  padding: 0 8px;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Position button on right side for received messages (left side messages) */
+.catalyst-dm-check-container.right-side {
+  right: 8px !important;
+}
+
+/* Position button on left side for sent messages (right side messages) */
+.catalyst-dm-check-container.left-side {
+  left: 8px !important;
+}
+
+/* DM Check Button Styling */
+.catalyst-dm-check-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+  background-color: #2ecc71;
+  backdrop-filter: blur(4px);
+  transform: scale(1);
+  color: black;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.catalyst-dm-check-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* .catalyst-dm-check-btn[data-selected='true'] {
+  opacity: 1;
+} */
+
+/* .catalyst-dm-check-btn[data-selected='true']:hover {
+  background-color: rgba(34, 197, 94, 0.4);
+} */
+
+.catalyst-dm-check-btn svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.catalyst-dm-check-btn .selected-icon {
+  opacity: 0;
+}
+
+.catalyst-dm-check-btn .unselected-icon {
+  opacity: 1;
+}
+
+.catalyst-dm-check-btn[data-selected='true'] .selected-icon {
+  opacity: 1;
+}
+
+.catalyst-dm-check-btn[data-selected='true'] .unselected-icon {
+  opacity: 0;
+}
+
+.catalyst-dm-check-container + * > div {
+  transition: all 0.2s ease;
+}
+
+.catalyst-dm-check-container:has([data-selected='true']) + * > div {
+  /* outline: 2px solid var(--primary-color);
+  box-shadow: 0 0 0 2px currentColor;
+  transform: translate(1px, 1px); */
+}
+
+/* Selected message styling - Simple yellow border */
+[data-testid='messageEntry'][data-catalyst-message-id] {
+  transition: border-color 0.2s ease !important;
+}
+[data-testid='messageEntry'][data-selected='true'] {
+  border: 2px solid #fbbf24 !important; /* yellow-400 */
+  border-radius: 8px !important;
+}
+
+/* DM Layout Modifications */
+/* Hide navigation section when conversation list is hidden */
+.catalyst-dm-navigation-hidden {
+  display: none !important;
+}
+
+/* Detail section styling when navigation is hidden */
+.catalyst-dm-detail-fullwidth {
+  margin: 0 !important;
+  border-left-width: 1px;
+  max-width: 600px !important;
+}
+
+/* Back button for when navigation is hidden */
+.catalyst-dm-back-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: inherit;
+  font-size: 16px;
+  backdrop-filter: blur(4px);
+  margin-right: 8px;
+  transition: opacity 0.2s ease;
+}
+
+.catalyst-dm-back-button:hover {
+  opacity: 0.6;
+}
+
+.catalyst-dm-back-button:active {
+  opacity: 0.4;
+}
+
+/* html[style*='color-scheme: dark'] .catalyst-dm-check-btn {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  opacity: 1;
+}
+
+html[style*='color-scheme: dark'] .catalyst-dm-check-btn:hover {
+  opacity: 0.8;
+}
+
+html[style*='color-scheme: dark'] .catalyst-dm-check-btn[data-selected='true'] {
+  background-color: rgba(34, 197, 94, 0.3);
+  color: rgba(34, 197, 94, 1);
+  opacity: 1;
+}
+
+html[style*='color-scheme: dark'] .catalyst-dm-check-btn[data-selected='true']:hover {
+  background-color: rgba(34, 197, 94, 0.4);
+} */

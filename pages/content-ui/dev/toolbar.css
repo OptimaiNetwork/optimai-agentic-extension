@@ -1,0 +1,88 @@
+/* The harness's controls. Nothing here is product styling. */
+
+.dev-bar {
+  position: fixed;
+  left: 12px;
+  bottom: 12px;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  max-width: calc(100vw - 540px);
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: rgba(16, 18, 20, 0.92);
+  backdrop-filter: blur(10px);
+  color: #e7e9ea;
+  font:
+    12px/1.4 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+}
+
+.dev-title {
+  color: #71767b;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dev-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding-left: 10px;
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dev-label {
+  color: #71767b;
+}
+
+.dev-form {
+  display: flex;
+  gap: 4px;
+}
+
+.dev-input {
+  width: 72px;
+  padding: 4px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 6px;
+  background: #000;
+  color: inherit;
+  font: inherit;
+  text-transform: uppercase;
+}
+
+.dev-btn,
+.dev-chip,
+.dev-primary {
+  padding: 4px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
+.dev-chip:hover,
+.dev-btn:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.dev-chip.is-on {
+  border-color: rgba(0, 186, 124, 0.7);
+  background: rgba(0, 186, 124, 0.16);
+  color: #6ee7b7;
+}
+
+.dev-primary {
+  border-color: rgba(0, 186, 124, 0.7);
+  background: rgba(0, 186, 124, 0.18);
+  color: #6ee7b7;
+  font-weight: 600;
+}

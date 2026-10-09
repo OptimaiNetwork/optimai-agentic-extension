@@ -1,0 +1,70 @@
+/* Global styles to override the host page (injected into document head) */
+
+/* Note: Removed sidebar hiding since we're now using a floating overlay approach */
+
+/* Ensure full height propagation for all extension elements */
+
+html body[data-scroll-locked] {
+  overflow: unset !important;
+  pointer-events: auto !important;
+  margin-right: 0 !important;
+}
+
+/* Extension drag functionality */
+#catalyst-extension-container {
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) !important;
+  transition: box-shadow 0.2s ease !important;
+}
+
+#catalyst-extension-container.select-none {
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.5) !important;
+}
+
+#catalyst-extension-container *::-webkit-scrollbar {
+  width: 4px;
+}
+#catalyst-extension-container *::-webkit-scrollbar-track {
+  background: transparent;
+}
+#catalyst-extension-container *::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+}
+#catalyst-extension-container *::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+:root {
+  --primary-color: rgb(46, 204, 113);
+
+  /* The one place the light-DOM injections name a typeface. `TwitterChirp` is
+     X's own @font-face, which a content script can name but never has to
+     download -- an @font-face on the host document resolves for us too. Off
+     x.com the name matches nothing and the stack falls through to the system
+     font.
+
+     Kept in step with `fontFamily.sans` in
+     packages/tailwindcss-config/tailwind.config.ts, which is what dresses the
+     panel inside the shadow root. Two copies, because this file is plain CSS
+     injected into document.head -- Tailwind never processes it, so `@apply`
+     and `theme()` are both unavailable here. */
+  --catalyst-font-sans:
+    TwitterChirp, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+}
+
+/* Prevent text selection during drag */
+.select-none * {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+}
+
+/* Calculate height minus progress bar */
+.calc-h-minus-progress {
+  height: calc(100% - 45px);
+}

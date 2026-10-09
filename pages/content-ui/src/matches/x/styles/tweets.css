@@ -1,0 +1,598 @@
+/* ==========================================================================
+   TWEET BUTTONS
+   ========================================================================== */
+
+/* OptimAI Tweet Button Styles */
+.catalyst-tweet-button-wrapper {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.catalyst-tweet-button-mount {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 0 7px;
+}
+
+.catalyst-btn-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+.catalyst-tweet-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Wide enough for a ticker, not a fixed circle: the label is the point. */
+  min-width: 32px;
+  padding: 0 8px;
+  height: 28px;
+  border: 1px solid rgba(46, 204, 113, 0.3);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  overflow: hidden;
+  background: rgba(46, 204, 113, 0.2);
+  color: rgba(46, 204, 113, 1);
+  box-shadow: none;
+  backdrop-filter: none;
+  transform: translateY(0) translateZ(0);
+}
+
+/* Theme-adaptive styling for X's color-scheme */
+/* html[style*='color-scheme: light'] .catalyst-tweet-btn {
+  background: rgba(46, 204, 113, 0.2);
+  border-color: rgba(46, 204, 113, 0.3);
+  color: rgba(46, 204, 113, 1);
+  box-shadow: none;
+} */
+
+.catalyst-tweet-btn:hover {
+  background-color: rgba(46, 204, 113, 0.3); /* Slightly more opaque on hover */
+  border-color: rgba(46, 204, 113, 0.4);
+  color: rgba(46, 204, 113, 1);
+  transform: translateY(0) translateZ(0); /* Remove hover transform */
+}
+
+.catalyst-tweet-btn:active {
+  transform: translateY(0) scale(0.95) translateZ(0);
+}
+
+/* html[style*='color-scheme: light'] .catalyst-tweet-btn:hover {
+  background-color: rgba(46, 204, 113, 0.3);
+  border-color: rgba(46, 204, 113, 0.4);
+  color: rgba(46, 204, 113, 1);
+} */
+
+.catalyst-btn-icon {
+  width: 16px;
+  height: 16px;
+  color: currentColor;
+  transition: all 0.2s ease;
+}
+
+/* Highlighted quote button - slightly more prominent than normal */
+.catalyst-tweet-btn.quote.highlighted,
+.catalyst-tweet-btn.reply.highlighted {
+  background-color: rgba(46, 204, 113, 0.3); /* Increased from normal 0.2 to 0.3 (+10%) */
+  border-color: rgba(46, 204, 113, 0.55); /* Increased from normal 0.3 to 0.4 (+10%) */
+  color: rgba(46, 204, 113, 1);
+  box-shadow: none !important;
+  transform: translateY(0) translateZ(0);
+}
+
+/* html[style*='color-scheme: light'] .catalyst-tweet-btn.quote.highlighted,
+html[style*='color-scheme: light'] .catalyst-tweet-btn.reply.highlighted {
+  background-color: rgba(46, 204, 113, 0.3);
+  border-color: rgba(46, 204, 113, 0.4);
+  color: rgba(46, 204, 113, 1);
+  box-shadow: none !important;
+} */
+
+/* When there's a highlighted button in the wrapper, decrease opacity of non-highlighted buttons */
+.catalyst-tweet-button-wrapper:has(.catalyst-tweet-btn.highlighted)
+  .catalyst-tweet-btn:not(.highlighted) {
+  background-color: rgba(46, 204, 113, 0.1); /* Decreased from 0.2 to 0.1 */
+  border-color: rgba(46, 204, 113, 0.15); /* Decreased from 0.3 to 0.15 */
+  color: rgba(46, 204, 113, 0.6); /* Decreased from 1 to 0.6 */
+  opacity: 0.7; /* Additional overall opacity reduction */
+}
+
+/* Hover state for non-highlighted buttons when there's a highlighted one */
+.catalyst-tweet-button-wrapper:has(.catalyst-tweet-btn.highlighted)
+  .catalyst-tweet-btn:not(.highlighted):hover {
+  background-color: rgba(46, 204, 113, 0.15); /* Slightly more than dimmed state */
+  border-color: rgba(46, 204, 113, 0.2);
+  color: rgba(46, 204, 113, 0.8);
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   TWEET HIGHLIGHTS
+   ========================================================================== */
+
+/* Heavy green background for quoted tweets on X website */
+article[data-testid='tweet'].catalyst-quoted-tweet,
+article.catalyst-quoted-tweet,
+.catalyst-quoted-tweet {
+  background-color: rgba(34, 197, 94, 0.25) !important;
+  border: 2px solid rgba(34, 197, 94, 0.6) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  box-shadow:
+    0 0 0 2px rgba(34, 197, 94, 0.3),
+    0 4px 12px rgba(34, 197, 94, 0.2) !important;
+  animation: catalyst-quote-highlight 0.6s ease-out !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Green background for reply tweets on X website (same as quote) */
+article[data-testid='tweet'].catalyst-reply-tweet,
+article.catalyst-reply-tweet,
+.catalyst-reply-tweet {
+  background-color: rgba(34, 197, 94, 0.25) !important;
+  border: 2px solid rgba(34, 197, 94, 0.6) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  box-shadow:
+    0 0 0 2px rgba(34, 197, 94, 0.3),
+    0 4px 12px rgba(34, 197, 94, 0.2) !important;
+  animation: catalyst-reply-highlight 0.6s ease-out !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* Heavy animation when quote is applied */
+@keyframes catalyst-quote-highlight {
+  0% {
+    background-color: rgba(34, 197, 94, 0.4) !important;
+    border-color: rgba(34, 197, 94, 0.8) !important;
+    transform: scale(1.01);
+    box-shadow:
+      0 0 0 3px rgba(34, 197, 94, 0.4),
+      0 6px 16px rgba(34, 197, 94, 0.3) !important;
+  }
+  100% {
+    background-color: rgba(34, 197, 94, 0.25) !important;
+    border-color: rgba(34, 197, 94, 0.6) !important;
+    transform: scale(1);
+    box-shadow:
+      0 0 0 2px rgba(34, 197, 94, 0.3),
+      0 4px 12px rgba(34, 197, 94, 0.2) !important;
+  }
+}
+
+/* Heavy animation when reply is applied (now using green) */
+@keyframes catalyst-reply-highlight {
+  0% {
+    background-color: rgba(34, 197, 94, 0.4) !important;
+    border-color: rgba(34, 197, 94, 0.8) !important;
+    transform: scale(1.01);
+    box-shadow:
+      0 0 0 3px rgba(34, 197, 94, 0.4),
+      0 6px 16px rgba(34, 197, 94, 0.3) !important;
+  }
+  100% {
+    background-color: rgba(34, 197, 94, 0.25) !important;
+    border-color: rgba(34, 197, 94, 0.6) !important;
+    transform: scale(1);
+    box-shadow:
+      0 0 0 2px rgba(34, 197, 94, 0.3),
+      0 4px 12px rgba(34, 197, 94, 0.2) !important;
+  }
+}
+
+/* Ensure the background covers the entire tweet and override X's default colors */
+article[data-testid='tweet'].catalyst-quoted-tweet > div,
+article.catalyst-quoted-tweet > div {
+  background-color: transparent !important;
+}
+
+/* Override any existing borders from X's default styling */
+article[data-testid='tweet'].catalyst-quoted-tweet,
+.catalyst-quoted-tweet {
+  border-color: rgba(34, 197, 94, 0.6) !important;
+  border-width: 2px !important;
+  border-style: solid !important;
+}
+
+/* Fallback styling with maximum specificity */
+html body article.catalyst-quoted-tweet,
+html body .catalyst-quoted-tweet {
+  background: rgba(34, 197, 94, 0.25) !important;
+  border: 2px solid rgba(34, 197, 94, 0.6) !important;
+}
+
+/* Make sure the green highlight is visible in dark mode too */
+[data-theme='dark'] article[data-testid='tweet'].catalyst-quoted-tweet,
+.dark article[data-testid='tweet'].catalyst-quoted-tweet {
+  background-color: rgba(34, 197, 94, 0.3) !important;
+  border-color: rgba(34, 197, 94, 0.7) !important;
+}
+
+/* Even more visible on hover */
+article[data-testid='tweet'].catalyst-quoted-tweet:hover,
+article.catalyst-quoted-tweet:hover {
+  background-color: rgba(34, 197, 94, 0.35) !important;
+  border-color: rgba(34, 197, 94, 0.8) !important;
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.4),
+    0 6px 16px rgba(34, 197, 94, 0.25) !important;
+}
+
+/* Even more visible on hover for reply tweets (now using green) */
+article[data-testid='tweet'].catalyst-reply-tweet:hover,
+article.catalyst-reply-tweet:hover {
+  background-color: rgba(34, 197, 94, 0.35) !important;
+  border-color: rgba(34, 197, 94, 0.8) !important;
+  box-shadow:
+    0 0 0 3px rgba(34, 197, 94, 0.4),
+    0 6px 16px rgba(34, 197, 94, 0.25) !important;
+}
+
+/* ==========================================================================
+   SEARCH PAGE CARD
+   Lives in X's light DOM, inside their column, so it inherits their width and
+   is exposed to their CSS. That is the trade for looking like it belongs.
+   ========================================================================== */
+
+#catalyst-search-card {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 16px 0;
+  padding: 20px 16px 18px;
+  border-bottom: 1px solid rgba(231, 233, 234, 0.1);
+}
+
+.catalyst-search-card {
+  box-sizing: border-box;
+  padding: 0;
+  color: inherit;
+  /* X sets its typeface on its own classes rather than on `body`, so a div of
+     ours inherits nothing and falls back to the browser default — the card
+     rendered in Times against a page of Chirp. */
+  font-family: var(--catalyst-font-sans);
+}
+
+.catalyst-search-card-actions {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.catalyst-search-card-cta {
+  /* X sets text-align on buttons, so a button of ours does not centre itself. */
+  text-align: center;
+  /* An even half of the row each. `flex-basis: 0` rather than `auto` is what
+     makes them equal: on `auto` the buttons are sized by their own labels and
+     "See the full read" takes three times the width of "Trade". */
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px 16px;
+  border: 1px solid rgba(46, 204, 113, 0.22);
+  border-radius: 999px;
+  background: rgba(46, 204, 113, 0.12);
+  color: rgba(46, 204, 113, 1);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+/* `:not(:disabled)`, because CSS hover still fires on a disabled button — the
+   Trade button would have lit up on a token with no market behind it. */
+.catalyst-search-card-cta:not(:disabled):hover {
+  border-color: rgba(46, 204, 113, 0.45);
+  background: rgba(46, 204, 113, 0.2);
+}
+
+/* Filled rather than tinted: same width as the read, different weight, so the
+   money action is the one the eye lands on without taking more of the row. */
+.catalyst-search-card-cta-trade {
+  border-color: rgba(46, 204, 113, 0.9);
+  background: rgba(46, 204, 113, 1);
+  /* Near-black on solid green, so it holds contrast in both of X's themes
+     rather than inheriting a colour that only works in one. */
+  color: #04140b;
+}
+
+.catalyst-search-card-cta-trade:not(:disabled):hover {
+  border-color: rgba(64, 218, 128, 1);
+  background: rgba(64, 218, 128, 1);
+}
+
+.catalyst-search-card-cta:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* --------------------------------------------------------------------------
+   The card's insides.
+
+   Real CSS, not Tailwind. The compiled Tailwind is adopted into the panel's
+   shadow root and reaches nothing outside it, so every utility class used in
+   here matched no rule at all: the card rendered as unstyled stacked text with
+   a black chart. Colours are drawn from `currentColor` wherever possible so the
+   card follows whichever theme X is in rather than assuming dark.
+   -------------------------------------------------------------------------- */
+
+.catalyst-search-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+/* Logo and title as one button. Reset everything X puts on a button, then
+   lay the two out exactly as the plain divs were. */
+.catalyst-search-card-identity {
+  appearance: none !important;
+  display: flex !important;
+  flex: 1 1 auto;
+  align-items: center !important;
+  min-width: 0;
+  gap: 12px;
+  margin: -4px 0 -4px -6px !important;
+  padding: 4px 8px 4px 6px !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  font: inherit !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  transition: background-color 120ms ease;
+}
+
+.catalyst-search-card-identity:hover {
+  background: rgba(128, 128, 128, 0.12) !important;
+}
+
+.catalyst-search-card-title {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.catalyst-search-card-logo {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(128, 128, 128, 0.18);
+  object-fit: cover;
+  color: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.catalyst-search-card-logo-wrap {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  width: 44px;
+  height: 44px;
+}
+
+.catalyst-search-card-chain-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #111;
+  border-radius: 50%;
+  background: #222;
+}
+
+.catalyst-chain-mark {
+  width: 10px;
+  height: 10px;
+}
+
+.catalyst-search-card-symbol {
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+  letter-spacing: -0.01em;
+  color: inherit;
+}
+
+.catalyst-search-card-sub,
+.catalyst-search-card-note-small {
+  font-size: 15px;
+  line-height: 20px;
+  opacity: 0.6;
+  color: inherit;
+}
+
+.catalyst-search-card-price-wrap {
+  text-align: right;
+  flex-shrink: 0;
+  padding-top: 1px;
+}
+
+.catalyst-search-card-price {
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 32px;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  color: inherit;
+}
+
+.catalyst-search-card-chart {
+  margin-top: 15px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(231, 233, 234, 0.08);
+}
+
+.catalyst-search-card-note {
+  margin: 14px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  opacity: 0.85;
+  color: inherit;
+}
+
+.catalyst-chart {
+  display: block;
+  width: 100%;
+  min-height: 240px;
+  overflow: hidden;
+}
+
+/* --------------------------------------------------------------------------
+   The agent reading a post.
+
+   Not a box around the article. A highlighter sweeps across the post's own
+   text, left to right, line by line, and stays lit once it has passed — the
+   way a reader's eye moves and the way a marker leaves a trail. The article
+   itself only gets a faint lift so the eye finds the right row; the border
+   and glow the old effect drew were the loudest thing on the page and said
+   nothing about *what* was being read.
+
+   The sweep runs on the text block itself rather than on its inline runs:
+   X renders a post's copy as a mix of `<span>` runs, links and bare text
+   nodes, and only a rule on the block reaches all three.
+   -------------------------------------------------------------------------- */
+
+article[data-testid='tweet'].catalyst-agent-reading {
+  position: relative !important;
+  isolation: isolate;
+  background-color: rgba(34, 197, 94, 0.045) !important;
+  transition: background-color 200ms ease;
+}
+
+article[data-testid='tweet'].catalyst-agent-reading [data-testid='tweetText'] {
+  margin: 0 -6px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background-image: linear-gradient(
+    90deg,
+    rgba(74, 222, 128, 0.22) 0%,
+    rgba(74, 222, 128, 0.22) 46%,
+    rgba(74, 222, 128, 0.42) 50%,
+    rgba(74, 222, 128, 0) 54%
+  );
+  background-size: 220% 100%;
+  background-repeat: no-repeat;
+  animation: catalyst-agent-reading-sweep 380ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* A thin caret at the left edge of the article, breathing while it reads. */
+article[data-testid='tweet'].catalyst-agent-reading::before {
+  position: absolute;
+  z-index: 1;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: rgba(74, 222, 128, 0.9);
+  content: '';
+  pointer-events: none;
+  animation: catalyst-agent-reading-caret 380ms ease-out both;
+}
+
+/* --------------------------------------------------------------------------
+   INLINE MARKET INJECTION
+
+   Drawn to sit beside Binance Wallet's own row on the same tweet: a grey
+   pill, the token's logo, its symbol, its price in green. Nothing else. The
+   colours are theme-neutral greys so the pill reads the same on X's light and
+   dark themes as the row above it does.
+   -------------------------------------------------------------------------- */
+
+.catalyst-tweet-injection-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  margin: 2px 0 8px;
+  /* X sets Chirp on its own text classes, not on `body`, so a div of ours in
+     the tweet inherits nothing and the pill fell back to the browser serif. */
+  font-family:
+    TwitterChirp,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+}
+
+/* The pill itself, its avatar and the hover card live in
+   modules/ticker-popover/{pill,popover}.css, shared with the badge and the card
+   on other sites. */
+
+a.catalyst-market-cashtag {
+  border-radius: 3px;
+  text-decoration: underline dotted rgba(29, 155, 240, 0.5) !important;
+  text-underline-offset: 3px;
+  transition:
+    background-color 120ms ease,
+    text-decoration-color 120ms ease;
+}
+
+a.catalyst-market-cashtag:hover {
+  border-radius: 4px;
+  background: rgba(29, 155, 240, 0.12);
+  text-decoration-color: currentColor !important;
+}
+
+@keyframes catalyst-agent-reading-sweep {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes catalyst-agent-reading-caret {
+  0% {
+    opacity: 0;
+    transform: scaleY(0.4);
+  }
+  30% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  100% {
+    opacity: 0.85;
+    transform: scaleY(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  article[data-testid='tweet'].catalyst-agent-reading [data-testid='tweetText'],
+  article[data-testid='tweet'].catalyst-agent-reading::before {
+    animation: none;
+    background-position: 0 0;
+    opacity: 1;
+  }
+}

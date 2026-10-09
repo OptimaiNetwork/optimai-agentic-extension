@@ -1,0 +1,23 @@
+{
+  "name": "@extension/e2e",
+  "version": "0.5.0",
+  "description": "chrome extension - end to end tests over CDP",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
+    "chrome": "tsx scripts/launch-chrome.ts",
+    "chrome:stop": "tsx scripts/stop-chrome.ts",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier . --write --ignore-path ../../.prettierignore",
+    "type-check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/node": "^24.3.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2"
+  }
+}

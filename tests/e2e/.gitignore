@@ -1,0 +1,9 @@
+.chrome-profile/
+# Any extra profile, e.g. the clean one the guard tells you to make.
+.chrome-profile-*/
+.chrome.pid
+.chrome.endpoint
+.chrome.log
+test-results/
+playwright-report/
+.x-run/

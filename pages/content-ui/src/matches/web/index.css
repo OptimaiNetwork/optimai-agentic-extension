@@ -1,0 +1,31 @@
+/* The shadow root's stylesheet, compiled by the Tailwind step in
+   pages/content-ui/build.mts and adopted by bootstrap.tsx beside
+   modules/ticker-popover/popover.css (the hover card, plain CSS).
+
+   Tailwind is here for the trade panel, which is the X panel's buy screen and
+   is written in utility classes. Preflight only reaches this shadow tree. */
+
+/* First, so preflight's own `:host` rule below still sets the type. Nothing the
+   page styles may leak in through inheritance. */
+:host {
+  all: initial;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border outline-white;
+  }
+}
+
+#catalyst-web-layer {
+  position: fixed;
+  inset: 0 auto auto 0;
+  width: 0;
+  height: 0;
+  overflow: visible;
+  pointer-events: none;
+}

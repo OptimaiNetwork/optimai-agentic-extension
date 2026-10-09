@@ -1,0 +1,14 @@
+/* Drag handle styling */
+.drag-handle {
+  backdrop-filter: blur(10px) !important;
+  border-radius: 12px 12px 0 0 !important;
+  transition: all 0.2s ease !important;
+}
+
+.drag-handle:hover {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.8)) !important;
+}
+
+.drag-handle:active {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.9)) !important;
+}

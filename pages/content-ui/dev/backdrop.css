@@ -1,0 +1,317 @@
+/*
+ * X's dark theme, close enough to design against.
+ *
+ * Plain CSS, not Tailwind: this is the light DOM, where the extension has no
+ * stylesheet and must not gain one. The panel's Tailwind lives inside the shadow
+ * root and stops at its boundary, which is exactly the separation being
+ * reproduced here.
+ *
+ * `--catalyst-font-sans` is deliberately not used. X declares `TwitterChirp`
+ * through an @font-face this page does not have, and the point of matching X's
+ * fallback stack here is that the panel inherits whatever this page resolves.
+ */
+
+.x-root {
+  --x-bg: #000;
+  --x-border: #2f3336;
+  --x-text: #e7e9ea;
+  --x-muted: #71767b;
+  --x-blue: #1d9bf0;
+  --x-hover: rgba(255, 255, 255, 0.03);
+
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  min-height: 100vh;
+  background: var(--x-bg);
+  color: var(--x-text);
+  font-family:
+    TwitterChirp, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+/* ---------------------------------------------------------------- left rail */
+
+.x-rail {
+  width: 275px;
+  flex: 0 0 275px;
+  padding: 4px 12px 0;
+  border-right: 1px solid var(--x-border);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.x-logo {
+  font-size: 26px;
+  padding: 12px;
+  width: 50px;
+}
+
+.x-navitem {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 11px 12px;
+  border-radius: 9999px;
+  color: var(--x-text);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.x-navitem:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.x-navicon {
+  font-size: 22px;
+  width: 26px;
+  text-align: center;
+}
+
+.x-navlabel {
+  font-size: 20px;
+}
+
+.x-navitem.is-active .x-navlabel {
+  font-weight: 700;
+}
+
+.x-post {
+  margin-top: 16px;
+  margin-right: 12px;
+  padding: 15px;
+  border: none;
+  border-radius: 9999px;
+  background: var(--x-text);
+  color: #000;
+  font-size: 17px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------ centre column */
+
+.x-center {
+  width: 600px;
+  flex: 0 0 600px;
+  border-right: 1px solid var(--x-border);
+}
+
+.x-colhead {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  display: flex;
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.65);
+  border-bottom: 1px solid var(--x-border);
+}
+
+.x-coltitle,
+.x-coltab {
+  flex: 1;
+  text-align: center;
+  padding: 16px;
+  font-size: 15px;
+}
+
+.x-coltitle {
+  font-weight: 700;
+  box-shadow: inset 0 -4px 0 var(--x-blue);
+}
+
+.x-coltab {
+  color: var(--x-muted);
+}
+
+/* The virtualised list: absolutely positioned cells in a relative container. */
+.x-cells {
+  position: relative;
+}
+
+.x-cell {
+  position: relative;
+  width: 100%;
+  border-bottom: 1px solid var(--x-border);
+}
+
+/* ------------------------------------------------------------------ a tweet */
+
+.x-tweet {
+  display: flex;
+  gap: 12px;
+  padding: 12px 16px;
+}
+
+.x-tweet:hover {
+  background: var(--x-hover);
+}
+
+.x-avatar {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+  border-radius: 9999px;
+}
+
+.x-tweet-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.x-names {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 15px;
+}
+
+.x-names a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.x-name {
+  font-weight: 700;
+}
+
+.x-name:hover {
+  text-decoration: underline;
+}
+
+.x-handle,
+.x-dot,
+.x-time {
+  color: var(--x-muted);
+}
+
+.x-text {
+  margin-top: 2px;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.x-link {
+  color: var(--x-blue);
+  text-decoration: none;
+}
+
+.x-link:hover {
+  text-decoration: underline;
+}
+
+.x-actions {
+  display: flex;
+  justify-content: space-between;
+  max-width: 425px;
+  margin-top: 12px;
+}
+
+.x-actions button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--x-muted);
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.x-actions button:hover {
+  color: var(--x-blue);
+}
+
+/* --------------------------------------------------------- X's price widget */
+
+.x-pricecard {
+  padding: 16px;
+  margin: 12px 16px;
+  border: 1px solid var(--x-border);
+  border-radius: 16px;
+}
+
+.x-pricecard-name {
+  font-weight: 700;
+}
+
+.x-pricecard-meta {
+  color: var(--x-muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.x-pricecard-price {
+  font-size: 23px;
+  font-weight: 700;
+  margin-top: 8px;
+}
+
+.x-pricecard-chart {
+  height: 120px;
+  margin-top: 12px;
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(0, 186, 124, 0.22), rgba(0, 186, 124, 0)),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 39px,
+      rgba(255, 255, 255, 0.04) 39px 40px
+    );
+}
+
+/* ------------------------------------------------------------- right column */
+
+.x-side {
+  width: 350px;
+  flex: 0 0 350px;
+  padding: 4px 24px 0 24px;
+}
+
+.x-search {
+  margin-top: 4px;
+  padding: 12px 16px;
+  border-radius: 9999px;
+  background: #202327;
+  color: var(--x-muted);
+}
+
+.x-widget {
+  margin-top: 16px;
+  border: 1px solid var(--x-border);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.x-widget h2 {
+  margin: 0;
+  padding: 12px 16px;
+  font-size: 20px;
+}
+
+.x-trend {
+  padding: 12px 16px;
+}
+
+.x-trend:hover {
+  background: var(--x-hover);
+}
+
+.x-trend-cat,
+.x-trend-count {
+  color: var(--x-muted);
+  font-size: 13px;
+}
+
+.x-trend-name {
+  font-weight: 700;
+}

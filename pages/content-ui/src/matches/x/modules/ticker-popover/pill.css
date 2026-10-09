@@ -1,0 +1,69 @@
+/* --------------------------------------------------------------------------
+   MARKET PILL
+
+   A grey pill: the token's logo, its symbol, its price in green. Nothing else.
+   Drawn to sit beside Binance Wallet's own row on a tweet, and shared with the
+   badge on other sites, which loads this file into the badge's shadow root and
+   only resizes it to sit in a line of text. The `!important`s are for X, where
+   the pill sits in X's own DOM.
+   -------------------------------------------------------------------------- */
+
+.catalyst-tweet-market-pill {
+  appearance: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+  max-width: 100% !important;
+  height: 36px !important;
+  padding: 0 14px 0 6px !important;
+  border: 0 !important;
+  border-radius: 999px !important;
+  background: rgba(128, 128, 128, 0.18) !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  font: inherit !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+  transition: background-color 140ms ease !important;
+}
+
+.catalyst-tweet-market-pill:hover,
+.catalyst-tweet-market-pill:focus-visible {
+  background: rgba(128, 128, 128, 0.28) !important;
+  outline: none !important;
+}
+
+.catalyst-tweet-market-pill:active {
+  background: rgba(128, 128, 128, 0.34) !important;
+}
+
+.catalyst-tweet-market-more {
+  padding: 0 12px 0 14px !important;
+}
+
+.catalyst-tweet-market-chevron {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 2px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0.85;
+}
+
+.catalyst-tweet-market-symbol {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.catalyst-tweet-market-price {
+  color: #22c777;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  white-space: nowrap;
+}

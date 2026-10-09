@@ -1,0 +1,146 @@
+/* Telegram Content Hiding Styles */
+
+/* Body width adjustment when extension is active */
+@media (min-width: 1024px) {
+  body.catalyst-telegram-active {
+    width: calc(100vw - 500px) !important;
+    transition: width 0.3s ease;
+
+    --right-column-width: 18vw;
+  }
+}
+
+/* Additional styles for Telegram layout adjustments */
+.catalyst-telegram-active {
+  /* Ensure smooth transition */
+  transition: width 0.3s ease;
+}
+
+/* Telegram Message Check Button Styles */
+.catalyst-telegram-check-container {
+  padding: 0 8px;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* Position button on right side for incoming messages (friend) */
+.catalyst-telegram-check-container.right-side {
+  left: calc(100% + 8px);
+}
+
+/* Position button on left side for outgoing messages (user) */
+.catalyst-telegram-check-container.left-side {
+  right: calc(100% + 8px);
+}
+
+.catalyst-telegram-check-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  transition: all 0.2s ease;
+  background-color: rgba(46, 204, 113, 0.9);
+  backdrop-filter: blur(4px);
+  opacity: 0.9;
+  transform: scale(1);
+  color: black;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.catalyst-telegram-check-btn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.catalyst-telegram-check-btn[data-selected='true'] {
+  background-color: rgba(34, 197, 94, 1);
+  opacity: 1;
+}
+
+.catalyst-telegram-check-btn svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.catalyst-telegram-check-btn .selected-icon {
+  opacity: 0;
+}
+
+.catalyst-telegram-check-btn .unselected-icon {
+  opacity: 1;
+}
+
+.catalyst-telegram-check-btn[data-selected='true'] .selected-icon {
+  opacity: 1;
+}
+
+.catalyst-telegram-check-btn[data-selected='true'] .unselected-icon {
+  opacity: 0;
+}
+
+.bubble[data-catalyst-message-id] {
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.bubble[data-catalyst-message-id]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 104%;
+  height: 104%;
+  z-index: -1;
+  border: 2px solid #fbbf24;
+  border-radius: 12px;
+  transition: opacity 0.2s ease;
+  opacity: 0;
+}
+/* Selected message bubble styling - Simple yellow border */
+.bubble[data-selected='true'] {
+  position: relative;
+}
+
+.bubble[data-selected='true']::before {
+  opacity: 1;
+}
+
+/* Ensure message bubbles can contain positioned elements */
+.bubble .bubble-content-wrapper {
+  position: relative;
+}
+
+/* Disable user selection and focus on Telegram content when hotkeys are disabled */
+body.catalyst-telegram-hotkeys-disabled {
+  /* Ensure our extension has higher z-index priority */
+}
+
+body.catalyst-telegram-hotkeys-disabled #catalyst-extension-container {
+  /* Ensure our extension receives all keyboard events */
+  position: relative;
+  z-index: 999999;
+}
+
+/* Make sure our input elements can receive focus */
+body.catalyst-telegram-hotkeys-disabled #catalyst-extension-container input,
+body.catalyst-telegram-hotkeys-disabled #catalyst-extension-container textarea,
+body.catalyst-telegram-hotkeys-disabled #catalyst-extension-container button {
+  pointer-events: auto;
+  user-select: auto;
+}

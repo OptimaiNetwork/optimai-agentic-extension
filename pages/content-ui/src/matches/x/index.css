@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* No `font-sans` here on purpose. Preflight's opening rule is `html, :host`,
+     and `:host` is the shadow host -- so the typeface already lands at the root
+     of our shadow tree and reaches the rest by inheritance, with preflight
+     handing buttons, inputs and textareas `font-family: inherit` on the way.
+     Repeating it on `*` only stamps the same stack onto every element. */
+  * {
+    @apply border-border outline-white;
+  }
+  body {
+    @apply bg-background text-foreground font-light antialiased;
+    font-optical-sizing: auto;
+  }
+
+  #catalyst-shadow-root.clickable:not(.prevent-click) {
+    @apply !pointer-events-auto;
+  }
+
+  #catalyst-shadow-root.dimmed {
+    @apply pointer-events-none bg-black/50;
+  }
+
+  #catalyst-shadow-root.dimmed.prevent-click {
+    @apply !pointer-events-auto;
+  }
+}
+
+/* Research card motion, from the card design canvas ("Agent research cards").
+   Plain CSS rather than Tailwind keyframes: the classes are named in JSX and
+   several animate SVG attributes, which Tailwind's `animate-*` cannot express.
+   Every one stops under reduced motion — the cards read the same standing still. */
+@keyframes card-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes card-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes card-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes card-ping {
+  0% {
+    transform: scale(1);
+    opacity: 0.55;
+  }
+  80%,
+  100% {
+    transform: scale(2.8);
+    opacity: 0;
+  }
+}
+@keyframes card-draw {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes card-flow {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+@keyframes card-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+@keyframes card-travel {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  15%,
+  85% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(14px);
+    opacity: 0;
+  }
+}
+@keyframes card-scan {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(var(--scan, 150px));
+  }
+}
+@keyframes card-needle {
+  0% {
+    transform: rotate(-80deg);
+  }
+  70% {
+    transform: rotate(calc(var(--needle, 0deg) + 6deg));
+  }
+  100% {
+    transform: rotate(var(--needle, 0deg));
+  }
+}
+@keyframes card-sweep {
+  from {
+    transform: rotate(-100deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+@keyframes card-tide {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+@keyframes card-slidein {
+  from {
+    transform: translateX(var(--slide, 120px));
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes card-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(94, 237, 135, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(94, 237, 135, 0.14);
+  }
+}
+
+.card-rise {
+  animation: card-rise 0.55s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.card-grow {
+  transform-origin: left center;
+  animation: card-grow 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.card-fade {
+  animation: card-fade 0.6s ease both;
+}
+.card-ping {
+  animation: card-ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+.card-draw {
+  stroke-dasharray: 1200;
+  animation: card-draw 1.6s cubic-bezier(0.3, 0.6, 0.2, 1) both;
+}
+.card-flow {
+  stroke-dasharray: 4 8;
+  animation: card-flow 1.1s linear infinite;
+}
+.card-bob {
+  animation: card-bob 3.2s ease-in-out infinite;
+}
+.card-travel {
+  animation: card-travel 2.4s ease-in-out infinite;
+}
+.card-scan {
+  animation: card-scan 3.6s ease-in-out infinite;
+}
+.card-needle {
+  animation: card-needle 1.4s cubic-bezier(0.3, 0.7, 0.2, 1) both;
+  transform: rotate(var(--needle, 0deg));
+}
+.card-sweep {
+  animation: card-sweep 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.card-tide {
+  animation: card-tide 2.6s ease-in-out infinite;
+}
+.card-slidein {
+  animation: card-slidein 1s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+.card-glow {
+  animation: card-glow 2.4s ease-in-out infinite;
+}
+
+/* The trade analysis scale: the beam settles toward the side that leads, then
+   breathes. Each pan counter-rotates by the same angle so it hangs level. */
+@keyframes card-tilt {
+  0% {
+    transform: rotate(0);
+  }
+  55% {
+    transform: rotate(calc(var(--tilt) * 1.4));
+  }
+  80% {
+    transform: rotate(calc(var(--tilt) * 0.85));
+  }
+  100% {
+    transform: rotate(var(--tilt));
+  }
+}
+@keyframes card-sway {
+  0%,
+  100% {
+    transform: rotate(var(--tilt));
+  }
+  50% {
+    transform: rotate(calc(var(--tilt) * 0.8));
+  }
+}
+.card-tilt,
+.card-hang {
+  transform: rotate(var(--tilt));
+  animation:
+    card-tilt 1.5s cubic-bezier(0.3, 0.7, 0.2, 1) 0.35s both,
+    card-sway 4s ease-in-out 1.9s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-rise,
+  .card-grow,
+  .card-fade,
+  .card-ping,
+  .card-draw,
+  .card-flow,
+  .card-bob,
+  .card-travel,
+  .card-scan,
+  .card-needle,
+  .card-sweep,
+  .card-tide,
+  .card-slidein,
+  .card-glow,
+  .card-tilt,
+  .card-hang {
+    animation: none !important;
+  }
+  .card-ping {
+    display: none;
+  }
+}

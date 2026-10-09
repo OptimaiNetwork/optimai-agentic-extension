@@ -1,0 +1,226 @@
+{
+  "trade-intent": {
+    "version": 1,
+    "title": "Buy NVDAB",
+    "sourceToolCallIds": [
+      "m1"
+    ],
+    "sourceIds": [
+      "m1"
+    ],
+    "subject": {
+      "ticker": "NVDA",
+      "companyName": null,
+      "venue": "bstock",
+      "chain": null
+    },
+    "observedAt": "2026-09-23T04:00:00Z",
+    "status": "complete",
+    "limitations": [
+      "Indicative only. Confirm opens the trade screen, which fetches a live quote and hands the transaction to your wallet \u2014 nothing is signed yet."
+    ],
+    "kind": "trade-intent",
+    "side": "buy",
+    "symbol": "NVDAB",
+    "chain": "bnb",
+    "venueLabel": "bStocks",
+    "amount": "100",
+    "payToken": "USDT",
+    "priceUsd": "228.52",
+    "estimatedAmount": "0.437598",
+    "quotedAt": "2026-09-23T04:00:00Z"
+  },
+  "markets": {
+    "version": 1,
+    "title": "ANDURIL markets on Ondo on Solana",
+    "sourceToolCallIds": [
+      "m1"
+    ],
+    "sourceIds": [
+      "m1"
+    ],
+    "subject": {
+      "ticker": "ANDURIL",
+      "companyName": null,
+      "venue": "ondo_solana",
+      "chain": null
+    },
+    "observedAt": "2026-09-23T04:00:00Z",
+    "status": "partial",
+    "limitations": [
+      "geckoterminal does not say how many markets exist, so this is what it returned and not necessarily all of them."
+    ],
+    "kind": "markets",
+    "chain": "solana",
+    "source": "geckoterminal",
+    "coverage": "unknown",
+    "markets": [
+      {
+        "id": "solana:pool1",
+        "venue": "Meteora",
+        "pair": "ANDURL / USDC",
+        "priceUsd": "150.85",
+        "liquidityUsd": "55090",
+        "volume24hUsd": "11610",
+        "url": "https://www.geckoterminal.com/solana/pools/pool1"
+      }
+    ],
+    "totalCount": 1,
+    "priceSpreadPercent": null,
+    "spreadVenueCount": 1,
+    "fetchedAt": "2026-09-23T03:30:00Z"
+  },
+  "portfolio": {
+    "version": 1,
+    "title": "Your positions",
+    "sourceToolCallIds": [
+      "m1"
+    ],
+    "sourceIds": [
+      "m1"
+    ],
+    "subject": {
+      "ticker": "PORTFOLIO",
+      "companyName": null,
+      "venue": null,
+      "chain": null
+    },
+    "observedAt": "2026-09-23T04:00:00Z",
+    "status": "complete",
+    "limitations": [
+      "Built from trades recorded through this extension only. Anything bought elsewhere in the same wallet is not counted."
+    ],
+    "kind": "portfolio",
+    "walletCount": 1,
+    "realizedPnl": "20",
+    "unrealizedPnl": "12.5",
+    "totalPnl": "32.5",
+    "costBasis": "400",
+    "marketValue": "412.5",
+    "winRatePercent": "100",
+    "tradeCount": 3,
+    "openPositionCount": 1,
+    "pricedPositionCount": 1,
+    "positions": [
+      {
+        "ticker": "NVDA",
+        "chain": "bnb",
+        "venue": "bstock",
+        "quantity": "2",
+        "averageEntryPrice": "200",
+        "currentPrice": "206.25",
+        "marketValue": "412.5",
+        "unrealizedPnl": "12.5",
+        "unrealizedPnlPercent": "3.125",
+        "weightPercent": "100"
+      }
+    ]
+  },
+  "trade-analysis": {
+    "version": 1,
+    "title": "NVDA trade analysis",
+    "sourceToolCallIds": [],
+    "sourceIds": [
+      "m_1",
+      "m_2",
+      "i_1",
+      "m_3"
+    ],
+    "subject": {
+      "ticker": "NVDA",
+      "companyName": null,
+      "venue": "bstock",
+      "chain": null
+    },
+    "observedAt": "2026-09-24T10:00:00Z",
+    "status": "partial",
+    "limitations": [
+      "Not read: sentiment (No X search this turn).",
+      "Valuation is the company's, against broad market bands, not its sector."
+    ],
+    "kind": "trade-analysis",
+    "symbol": "NVDAB",
+    "chain": "bnb",
+    "price": {
+      "value": "222.90",
+      "currency": "USD",
+      "basis": "reference",
+      "asOf": "2026-09-24T10:00:00Z",
+      "sourceId": "m_1"
+    },
+    "marketSession": "premarket",
+    "split": {
+      "buy": 21,
+      "hold": 54,
+      "sell": 25
+    },
+    "lean": "hold",
+    "confidence": "moderate",
+    "held": true,
+    "signals": [
+      {
+        "key": "trend",
+        "reading": "Up 9.4% in 30 days, 7.5% above its 50 day average",
+        "lean": "bullish",
+        "score": "0.75"
+      },
+      {
+        "key": "growth",
+        "reading": "Revenue up 106% on the year, quarter to Jul 26",
+        "lean": "bullish",
+        "score": "0.80"
+      },
+      {
+        "key": "valuation",
+        "reading": "P/E 28.5, a premium to the broad market",
+        "lean": "neutral",
+        "score": "-0.15"
+      },
+      {
+        "key": "momentum",
+        "reading": "RSI 100, stretched after a fast run",
+        "lean": "bearish",
+        "score": "-1.00"
+      },
+      {
+        "key": "sentiment",
+        "reading": "No X search this turn",
+        "lean": null,
+        "score": null
+      }
+    ],
+    "risks": [
+      {
+        "key": "concentration",
+        "reading": "46% of your recorded book",
+        "level": "high"
+      },
+      {
+        "key": "volatility",
+        "reading": "Moves about 0.00% a day",
+        "level": "low"
+      },
+      {
+        "key": "liquidity",
+        "reading": "$3.0M traded on chain in 24h",
+        "level": "low"
+      },
+      {
+        "key": "premium",
+        "reading": "Token 0.08% above the share",
+        "level": "low"
+      },
+      {
+        "key": "session",
+        "reading": "Nasdaq in premarket, thinner until the open",
+        "level": "low"
+      }
+    ],
+    "position": {
+      "symbol": "NVDAB",
+      "quantity": "0.4512",
+      "unrealizedPnlPercent": "34.20",
+      "weightPercent": "46.00"
+    }
+  }
+}

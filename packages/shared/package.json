@@ -1,0 +1,42 @@
+{
+  "name": "@extension/shared",
+  "version": "0.5.0",
+  "description": "chrome extension - shared code",
+  "type": "module",
+  "private": true,
+  "sideEffects": false,
+  "files": [
+    "dist/**"
+  ],
+  "types": "index.mts",
+  "main": "dist/index.mjs",
+  "scripts": {
+    "clean:bundle": "rimraf dist",
+    "clean:node_modules": "pnpx rimraf node_modules",
+    "clean:turbo": "rimraf .turbo",
+    "clean": "pnpm clean:bundle && pnpm clean:node_modules && pnpm clean:turbo",
+    "ready": "pnpm check:contract && tsc -b",
+    "lint": "eslint .",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier . --write --ignore-path ../../.prettierignore",
+    "type-check": "tsc --noEmit",
+    "postinstall": "pnpm ready",
+    "generate:validators": "node scripts/generate-validators.mjs --write",
+    "check:validators": "node scripts/generate-validators.mjs",
+    "generate:types": "node scripts/generate-types.mjs --write",
+    "check:contract": "node scripts/generate-types.mjs && node scripts/generate-validators.mjs"
+  },
+  "dependencies": {
+    "ai": "7.0.101",
+    "framer-motion": "^12.18.1",
+    "react-error-boundary": "^6.0.0"
+  },
+  "devDependencies": {
+    "@extension/storage": "workspace:*",
+    "@extension/tsconfig": "workspace:*",
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1",
+    "json-schema-to-typescript": "^16.0.0",
+    "type-fest": "^4.41.0"
+  }
+}

@@ -1,0 +1,3971 @@
+{
+  "$defs": {
+    "ActivitySnapshot": {
+      "$defs": {
+        "ActivityStep": {
+          "additionalProperties": false,
+          "description": "One thing the runtime actually did.\n\nTelemetry, not reasoning. `code` is an allowlisted event name the client\nmaps to a label \u2014 the server never ships display strings and the model never\nwrites any of this. A step is keyed by its tool call so a retry updates the\nrow it belongs to instead of appending a second one.",
+          "properties": {
+            "code": {
+              "maxLength": 48,
+              "title": "Code",
+              "type": "string"
+            },
+            "count": {
+              "anyOf": [
+                {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Count"
+            },
+            "detail": {
+              "anyOf": [
+                {
+                  "maxLength": 160,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Detail"
+            },
+            "executionId": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Executionid"
+            },
+            "finishedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Finishedat"
+            },
+            "id": {
+              "maxLength": 64,
+              "title": "Id",
+              "type": "string"
+            },
+            "startedAt": {
+              "format": "date-time",
+              "title": "Startedat",
+              "type": "string"
+            },
+            "status": {
+              "enum": [
+                "running",
+                "completed",
+                "failed",
+                "cancelled",
+                "interrupted"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "toolCallId": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Toolcallid"
+            },
+            "total": {
+              "anyOf": [
+                {
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Total"
+            }
+          },
+          "required": [
+            "id",
+            "code",
+            "status",
+            "startedAt"
+          ],
+          "title": "ActivityStep",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "runId": {
+          "maxLength": 64,
+          "title": "Runid",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "running",
+            "completed",
+            "cancelled",
+            "failed",
+            "expired"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/ActivityStep"
+          },
+          "maxItems": 40,
+          "title": "Steps",
+          "type": "array"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runId",
+        "status"
+      ],
+      "title": "ActivitySnapshot",
+      "type": "object"
+    },
+    "ActivityStep": {
+      "additionalProperties": false,
+      "description": "One thing the runtime actually did.\n\nTelemetry, not reasoning. `code` is an allowlisted event name the client\nmaps to a label \u2014 the server never ships display strings and the model never\nwrites any of this. A step is keyed by its tool call so a retry updates the\nrow it belongs to instead of appending a second one.",
+      "properties": {
+        "code": {
+          "maxLength": 48,
+          "title": "Code",
+          "type": "string"
+        },
+        "count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Count"
+        },
+        "detail": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Detail"
+        },
+        "executionId": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Executionid"
+        },
+        "finishedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Finishedat"
+        },
+        "id": {
+          "maxLength": 64,
+          "title": "Id",
+          "type": "string"
+        },
+        "startedAt": {
+          "format": "date-time",
+          "title": "Startedat",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "running",
+            "completed",
+            "failed",
+            "cancelled",
+            "interrupted"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "toolCallId": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Toolcallid"
+        },
+        "total": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total"
+        }
+      },
+      "required": [
+        "id",
+        "code",
+        "status",
+        "startedAt"
+      ],
+      "title": "ActivityStep",
+      "type": "object"
+    },
+    "ComparisonRow": {
+      "additionalProperties": false,
+      "description": "One listing in a comparison, with every axis it can differ on.\n\n`reference_price` rather than the raw token price, because raw token prices\nacross issuers are not comparable \u2014 the multipliers differ per issuer and\ncomparing them directly is the single most available way to be wrong here.",
+      "properties": {
+        "chain": {
+          "maxLength": 32,
+          "title": "Chain",
+          "type": "string"
+        },
+        "contractAddress": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Contractaddress"
+        },
+        "currency": {
+          "default": "USD",
+          "maxLength": 8,
+          "title": "Currency",
+          "type": "string"
+        },
+        "multiplier": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Multiplier"
+        },
+        "observedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observedat"
+        },
+        "referencePrice": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Referenceprice"
+        },
+        "sourceId": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sourceid"
+        },
+        "symbol": {
+          "maxLength": 32,
+          "title": "Symbol",
+          "type": "string"
+        },
+        "tokenPrice": {
+          "anyOf": [
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tokenprice"
+        },
+        "tradable": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Tradable"
+        },
+        "unavailableReason": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unavailablereason"
+        },
+        "venue": {
+          "maxLength": 32,
+          "title": "Venue",
+          "type": "string"
+        },
+        "venueLabel": {
+          "maxLength": 64,
+          "title": "Venuelabel",
+          "type": "string"
+        }
+      },
+      "required": [
+        "venue",
+        "venueLabel",
+        "chain",
+        "symbol"
+      ],
+      "title": "ComparisonRow",
+      "type": "object"
+    },
+    "PriceReading": {
+      "additionalProperties": false,
+      "description": "A price, what it is a price *of*, and when it was true.\n\n`basis` is the field that stops the whole product lying: a token price and\nthe share price it tracks are different quantities, and the multiplier-\nadjusted reference is a third. Rendering any of them without saying which\nis how a 0.057% gap that does not exist gets reported.",
+      "properties": {
+        "asOf": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Asof"
+        },
+        "basis": {
+          "enum": [
+            "token",
+            "share",
+            "reference"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "currency": {
+          "default": "USD",
+          "maxLength": 8,
+          "title": "Currency",
+          "type": "string"
+        },
+        "sourceId": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sourceid"
+        },
+        "value": {
+          "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "basis"
+      ],
+      "title": "PriceReading",
+      "type": "object"
+    },
+    "ResearchCard": {
+      "$defs": {
+        "AnalysisPosition": {
+          "additionalProperties": false,
+          "description": "What the reader already holds of it, from trades recorded in this panel.",
+          "properties": {
+            "quantity": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Quantity",
+              "type": "string"
+            },
+            "symbol": {
+              "maxLength": 16,
+              "title": "Symbol",
+              "type": "string"
+            },
+            "unrealizedPnlPercent": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealizedpnlpercent"
+            },
+            "weightPercent": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Weightpercent"
+            }
+          },
+          "required": [
+            "symbol",
+            "quantity"
+          ],
+          "title": "AnalysisPosition",
+          "type": "object"
+        },
+        "AnalysisRisk": {
+          "additionalProperties": false,
+          "description": "Not a direction: something that argues for waiting, at a level.",
+          "properties": {
+            "key": {
+              "enum": [
+                "volatility",
+                "liquidity",
+                "premium",
+                "session",
+                "concentration"
+              ],
+              "title": "Key",
+              "type": "string"
+            },
+            "level": {
+              "enum": [
+                "low",
+                "medium",
+                "high"
+              ],
+              "title": "Level",
+              "type": "string"
+            },
+            "reading": {
+              "maxLength": 120,
+              "title": "Reading",
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "reading",
+            "level"
+          ],
+          "title": "AnalysisRisk",
+          "type": "object"
+        },
+        "AnalysisSignal": {
+          "additionalProperties": false,
+          "description": "One directional reading, from bearish (-1) to bullish (+1).\n\n`lean` and `score` are absent together: a signal the data could not feed\nis shown as not read, with `reading` saying why, and it did not count.",
+          "properties": {
+            "key": {
+              "enum": [
+                "trend",
+                "growth",
+                "sentiment",
+                "valuation",
+                "momentum"
+              ],
+              "title": "Key",
+              "type": "string"
+            },
+            "lean": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "bullish",
+                    "neutral",
+                    "bearish"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Lean"
+            },
+            "reading": {
+              "maxLength": 120,
+              "title": "Reading",
+              "type": "string"
+            },
+            "score": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Score"
+            }
+          },
+          "required": [
+            "key",
+            "reading"
+          ],
+          "title": "AnalysisSignal",
+          "type": "object"
+        },
+        "AnalysisSplit": {
+          "additionalProperties": false,
+          "properties": {
+            "buy": {
+              "maximum": 100,
+              "minimum": 0,
+              "title": "Buy",
+              "type": "integer"
+            },
+            "hold": {
+              "maximum": 100,
+              "minimum": 0,
+              "title": "Hold",
+              "type": "integer"
+            },
+            "sell": {
+              "maximum": 100,
+              "minimum": 0,
+              "title": "Sell",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "buy",
+            "hold",
+            "sell"
+          ],
+          "title": "AnalysisSplit",
+          "type": "object"
+        },
+        "BackingCard": {
+          "additionalProperties": false,
+          "properties": {
+            "companyName": {
+              "anyOf": [
+                {
+                  "maxLength": 120,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Companyname"
+            },
+            "dailyReportUrl": {
+              "anyOf": [
+                {
+                  "maxLength": 300,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Dailyreporturl"
+            },
+            "fetchedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fetchedat"
+            },
+            "issuerLabel": {
+              "maxLength": 64,
+              "title": "Issuerlabel",
+              "type": "string"
+            },
+            "kind": {
+              "const": "backing",
+              "default": "backing",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "monthlyReportUrl": {
+              "anyOf": [
+                {
+                  "maxLength": 300,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Monthlyreporturl"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "reportedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Reportedat"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "issuerLabel"
+          ],
+          "title": "BackingCard",
+          "type": "object"
+        },
+        "Candle": {
+          "additionalProperties": false,
+          "properties": {
+            "close": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Close",
+              "type": "string"
+            },
+            "high": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "High",
+              "type": "string"
+            },
+            "low": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Low",
+              "type": "string"
+            },
+            "open": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Open",
+              "type": "string"
+            },
+            "session": {
+              "anyOf": [
+                {
+                  "maxLength": 16,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Session"
+            },
+            "time": {
+              "format": "date-time",
+              "title": "Time",
+              "type": "string"
+            },
+            "volume": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Volume"
+            }
+          },
+          "required": [
+            "time",
+            "open",
+            "high",
+            "low",
+            "close"
+          ],
+          "title": "Candle",
+          "type": "object"
+        },
+        "CheckedSource": {
+          "additionalProperties": false,
+          "description": "One source held against the claim, and what it turned out to say.\n\n`kind` is load-bearing. A company filing and a stranger's post are both\nsources and they are not the same kind of evidence, so the card groups by it\nand the status below is decided only by the primary ones.",
+          "properties": {
+            "excerpt": {
+              "anyOf": [
+                {
+                  "maxLength": 600,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Excerpt"
+            },
+            "kind": {
+              "enum": [
+                "sec_filing",
+                "company_announcement",
+                "x_post"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "publishedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Publishedat"
+            },
+            "publisher": {
+              "maxLength": 120,
+              "title": "Publisher",
+              "type": "string"
+            },
+            "sourceId": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Sourceid"
+            },
+            "title": {
+              "maxLength": 200,
+              "title": "Title",
+              "type": "string"
+            },
+            "url": {
+              "anyOf": [
+                {
+                  "maxLength": 400,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Url"
+            },
+            "verdict": {
+              "enum": [
+                "supports",
+                "contradicts",
+                "unaddressed",
+                "unread"
+              ],
+              "title": "Verdict",
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "title",
+            "publisher",
+            "observedAt",
+            "verdict"
+          ],
+          "title": "CheckedSource",
+          "type": "object"
+        },
+        "ClaimCheckCard": {
+          "additionalProperties": false,
+          "description": "Whether a claim is corroborated by sources that can corroborate it.\n\nThree deliberate refusals, each one a way this card could lie:\n\n**Silence is not denial.** A source that does not mention the claim is\n`unaddressed`, and `unverified` is the status when nothing primary speaks to\nit. Absence of confirmation is not evidence against.\n\n**A post does not confirm anything.** People on X repeat each other; ten\nposts saying the same thing is one rumour with nine echoes. They are listed\nbecause the reader asked about something they probably read there, and they\nare excluded from the status by construction.\n\n**`contradicted` needs a source that actually contradicts.** It is never\ninferred from a failure to match.",
+          "properties": {
+            "claim": {
+              "maxLength": 500,
+              "title": "Claim",
+              "type": "string"
+            },
+            "kind": {
+              "const": "claim-check",
+              "default": "claim-check",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "primaryChecked": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Primarychecked",
+              "type": "integer"
+            },
+            "primaryContradicting": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Primarycontradicting",
+              "type": "integer"
+            },
+            "primarySupporting": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Primarysupporting",
+              "type": "integer"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "sources": {
+              "items": {
+                "$ref": "#/$defs/CheckedSource"
+              },
+              "maxItems": 24,
+              "title": "Sources",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "verdict": {
+              "enum": [
+                "corroborated",
+                "contradicted",
+                "mixed",
+                "unverified"
+              ],
+              "title": "Verdict",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "claim",
+            "verdict"
+          ],
+          "title": "ClaimCheckCard",
+          "type": "object"
+        },
+        "ComparisonRow": {
+          "additionalProperties": false,
+          "description": "One listing in a comparison, with every axis it can differ on.\n\n`reference_price` rather than the raw token price, because raw token prices\nacross issuers are not comparable \u2014 the multipliers differ per issuer and\ncomparing them directly is the single most available way to be wrong here.",
+          "properties": {
+            "chain": {
+              "maxLength": 32,
+              "title": "Chain",
+              "type": "string"
+            },
+            "contractAddress": {
+              "anyOf": [
+                {
+                  "maxLength": 128,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Contractaddress"
+            },
+            "currency": {
+              "default": "USD",
+              "maxLength": 8,
+              "title": "Currency",
+              "type": "string"
+            },
+            "multiplier": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Multiplier"
+            },
+            "observedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Observedat"
+            },
+            "referencePrice": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Referenceprice"
+            },
+            "sourceId": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Sourceid"
+            },
+            "symbol": {
+              "maxLength": 32,
+              "title": "Symbol",
+              "type": "string"
+            },
+            "tokenPrice": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tokenprice"
+            },
+            "tradable": {
+              "anyOf": [
+                {
+                  "type": "boolean"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Tradable"
+            },
+            "unavailableReason": {
+              "anyOf": [
+                {
+                  "maxLength": 160,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unavailablereason"
+            },
+            "venue": {
+              "maxLength": 32,
+              "title": "Venue",
+              "type": "string"
+            },
+            "venueLabel": {
+              "maxLength": 64,
+              "title": "Venuelabel",
+              "type": "string"
+            }
+          },
+          "required": [
+            "venue",
+            "venueLabel",
+            "chain",
+            "symbol"
+          ],
+          "title": "ComparisonRow",
+          "type": "object"
+        },
+        "IssuerComparisonCard": {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "const": "issuer-comparison",
+              "default": "issuer-comparison",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "rows": {
+              "items": {
+                "$ref": "#/$defs/ComparisonRow"
+              },
+              "maxItems": 5,
+              "title": "Rows",
+              "type": "array"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt"
+          ],
+          "title": "IssuerComparisonCard",
+          "type": "object"
+        },
+        "MarketSnapshotCard": {
+          "additionalProperties": false,
+          "properties": {
+            "gapPercent": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Gappercent"
+            },
+            "kind": {
+              "const": "market-snapshot",
+              "default": "market-snapshot",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "marketCap": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Marketcap"
+            },
+            "marketSession": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Marketsession"
+            },
+            "multiplier": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Multiplier"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "priceChangePct24h": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Pricechangepct24H"
+            },
+            "referencePrice": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/PriceReading"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "sharePrice": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/PriceReading"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "tokenPrice": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/PriceReading"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "totalSupply": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Totalsupply"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            },
+            "volume24h": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Volume24H"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt"
+          ],
+          "title": "MarketSnapshotCard",
+          "type": "object"
+        },
+        "MarketVenueRow": {
+          "additionalProperties": false,
+          "description": "One market, from the requested token's side of it.",
+          "properties": {
+            "id": {
+              "maxLength": 128,
+              "title": "Id",
+              "type": "string"
+            },
+            "liquidityUsd": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Liquidityusd"
+            },
+            "pair": {
+              "description": "The requested token first",
+              "maxLength": 64,
+              "title": "Pair",
+              "type": "string"
+            },
+            "priceUsd": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Priceusd"
+            },
+            "url": {
+              "anyOf": [
+                {
+                  "maxLength": 512,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Url"
+            },
+            "venue": {
+              "description": "The protocol, named as the source names it",
+              "maxLength": 64,
+              "title": "Venue",
+              "type": "string"
+            },
+            "volume24hUsd": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Volume24Husd"
+            }
+          },
+          "required": [
+            "id",
+            "venue",
+            "pair"
+          ],
+          "title": "MarketVenueRow",
+          "type": "object"
+        },
+        "MarketsCard": {
+          "additionalProperties": false,
+          "description": "Where a token actually trades, and what it costs at each venue.\n\nDistinct from `MarketSnapshotCard`, which is one price for one token on one\nissuer. This is the spread across venues: the same token quoted at $150.86\non Manifest and $149.35 on Raydium CLMM in the same second. A reader asking\n\"where can I buy this\" is asking this question, and the snapshot card cannot\nanswer it.\n\n`coverage` is not decoration. Neither market directory states a total, so a\nfull page is evidence there may be more rather than a complete list, and the\ncard must not imply it has enumerated the market.",
+          "properties": {
+            "chain": {
+              "enum": [
+                "bnb",
+                "solana"
+              ],
+              "title": "Chain",
+              "type": "string"
+            },
+            "coverage": {
+              "enum": [
+                "complete",
+                "partial",
+                "unknown"
+              ],
+              "title": "Coverage",
+              "type": "string"
+            },
+            "fetchedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fetchedat"
+            },
+            "kind": {
+              "const": "markets",
+              "default": "markets",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "markets": {
+              "items": {
+                "$ref": "#/$defs/MarketVenueRow"
+              },
+              "maxItems": 12,
+              "title": "Markets",
+              "type": "array"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "priceSpreadPercent": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Pricespreadpercent"
+            },
+            "source": {
+              "description": "Which directory answered",
+              "maxLength": 32,
+              "title": "Source",
+              "type": "string"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "spreadVenueCount": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Spreadvenuecount",
+              "type": "integer"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "totalCount": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Totalcount",
+              "type": "integer"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "chain",
+            "source",
+            "coverage"
+          ],
+          "title": "MarketsCard",
+          "type": "object"
+        },
+        "ObservationWindow": {
+          "additionalProperties": false,
+          "description": "What was asked for, and what was actually seen inside it.",
+          "properties": {
+            "earliestPostAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Earliestpostat"
+            },
+            "latestPostAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Latestpostat"
+            },
+            "requestedFrom": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Requestedfrom"
+            },
+            "requestedTo": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Requestedto"
+            }
+          },
+          "title": "ObservationWindow",
+          "type": "object"
+        },
+        "PortfolioCard": {
+          "additionalProperties": false,
+          "description": "What the connected wallets hold, and what it has done.\n\nBuilt only from trades this product recorded, which is the limitation that\ngoverns every number on it: a token bought elsewhere and held in the same\nwallet is invisible here, so this is a record of activity rather than a\nbalance sheet. `pnl_complete` is the server saying whether every sell it\nmatched had a buy to match against.",
+          "properties": {
+            "costBasis": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Costbasis",
+              "type": "string"
+            },
+            "kind": {
+              "const": "portfolio",
+              "default": "portfolio",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "marketValue": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Marketvalue"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "openPositionCount": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Openpositioncount",
+              "type": "integer"
+            },
+            "positions": {
+              "items": {
+                "$ref": "#/$defs/PortfolioPositionRow"
+              },
+              "maxItems": 10,
+              "title": "Positions",
+              "type": "array"
+            },
+            "pricedPositionCount": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Pricedpositioncount",
+              "type": "integer"
+            },
+            "realizedPnl": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Realizedpnl",
+              "type": "string"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "totalPnl": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Totalpnl"
+            },
+            "tradeCount": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Tradecount",
+              "type": "integer"
+            },
+            "unrealizedPnl": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealizedpnl"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            },
+            "walletCount": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Walletcount",
+              "type": "integer"
+            },
+            "winRatePercent": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Winratepercent"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "realizedPnl",
+            "costBasis"
+          ],
+          "title": "PortfolioCard",
+          "type": "object"
+        },
+        "PortfolioPositionRow": {
+          "additionalProperties": false,
+          "description": "One open position. A token held on two chains is two positions.",
+          "properties": {
+            "averageEntryPrice": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Averageentryprice"
+            },
+            "chain": {
+              "enum": [
+                "bnb",
+                "solana"
+              ],
+              "title": "Chain",
+              "type": "string"
+            },
+            "currentPrice": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Currentprice"
+            },
+            "marketValue": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Marketvalue"
+            },
+            "quantity": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Quantity",
+              "type": "string"
+            },
+            "ticker": {
+              "maxLength": 16,
+              "title": "Ticker",
+              "type": "string"
+            },
+            "unrealizedPnl": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealizedpnl"
+            },
+            "unrealizedPnlPercent": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Unrealizedpnlpercent"
+            },
+            "venue": {
+              "maxLength": 32,
+              "title": "Venue",
+              "type": "string"
+            },
+            "weightPercent": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Weightpercent"
+            }
+          },
+          "required": [
+            "ticker",
+            "chain",
+            "venue",
+            "quantity"
+          ],
+          "title": "PortfolioPositionRow",
+          "type": "object"
+        },
+        "PostAuthorSnapshot": {
+          "additionalProperties": false,
+          "properties": {
+            "avatarUrl": {
+              "anyOf": [
+                {
+                  "maxLength": 400,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Avatarurl"
+            },
+            "followers": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Followers"
+            },
+            "handle": {
+              "maxLength": 64,
+              "title": "Handle",
+              "type": "string"
+            },
+            "name": {
+              "default": "",
+              "maxLength": 120,
+              "title": "Name",
+              "type": "string"
+            },
+            "verified": {
+              "default": false,
+              "title": "Verified",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "handle"
+          ],
+          "title": "PostAuthorSnapshot",
+          "type": "object"
+        },
+        "PostEngagementSnapshot": {
+          "additionalProperties": false,
+          "description": "What the collector actually observed, at the moment it looked.\n\nEvery field is optional because X renders these inconsistently and a\ncollector that scrolled past a post without reading its counts has seen\nnothing, not zero.",
+          "properties": {
+            "likes": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Likes"
+            },
+            "observedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Observedat"
+            },
+            "replies": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Replies"
+            },
+            "reposts": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Reposts"
+            },
+            "views": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Views"
+            }
+          },
+          "title": "PostEngagementSnapshot",
+          "type": "object"
+        },
+        "PriceChartCard": {
+          "additionalProperties": false,
+          "properties": {
+            "basis": {
+              "enum": [
+                "token",
+                "share",
+                "reference"
+              ],
+              "title": "Basis",
+              "type": "string"
+            },
+            "candles": {
+              "items": {
+                "$ref": "#/$defs/Candle"
+              },
+              "maxItems": 200,
+              "title": "Candles",
+              "type": "array"
+            },
+            "currency": {
+              "default": "USD",
+              "maxLength": 8,
+              "title": "Currency",
+              "type": "string"
+            },
+            "fetchedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Fetchedat"
+            },
+            "interval": {
+              "maxLength": 8,
+              "title": "Interval",
+              "type": "string"
+            },
+            "kind": {
+              "const": "price-chart",
+              "default": "price-chart",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "basis",
+            "interval"
+          ],
+          "title": "PriceChartCard",
+          "type": "object"
+        },
+        "PriceReading": {
+          "additionalProperties": false,
+          "description": "A price, what it is a price *of*, and when it was true.\n\n`basis` is the field that stops the whole product lying: a token price and\nthe share price it tracks are different quantities, and the multiplier-\nadjusted reference is a third. Rendering any of them without saying which\nis how a 0.057% gap that does not exist gets reported.",
+          "properties": {
+            "asOf": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Asof"
+            },
+            "basis": {
+              "enum": [
+                "token",
+                "share",
+                "reference"
+              ],
+              "title": "Basis",
+              "type": "string"
+            },
+            "currency": {
+              "default": "USD",
+              "maxLength": 8,
+              "title": "Currency",
+              "type": "string"
+            },
+            "sourceId": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Sourceid"
+            },
+            "value": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Value",
+              "type": "string"
+            }
+          },
+          "required": [
+            "value",
+            "basis"
+          ],
+          "title": "PriceReading",
+          "type": "object"
+        },
+        "ResearchPostSnapshot": {
+          "additionalProperties": false,
+          "description": "One post, stored well enough to re-render it after a reload.\n\nThe snapshot carries the post text itself instead of a pointer into a tool\nresult. Nothing in this extension keeps tool outputs on the client, so a\npointer would render an empty card the moment the panel reopened. The text\ntravels.",
+          "properties": {
+            "author": {
+              "$ref": "#/$defs/PostAuthorSnapshot"
+            },
+            "engagement": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/PostEngagementSnapshot"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "id": {
+              "maxLength": 40,
+              "title": "Id",
+              "type": "string"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "publishedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Publishedat"
+            },
+            "quotedPostId": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Quotedpostid"
+            },
+            "repostedPostId": {
+              "anyOf": [
+                {
+                  "maxLength": 40,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Repostedpostid"
+            },
+            "sourceId": {
+              "anyOf": [
+                {
+                  "maxLength": 64,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Sourceid"
+            },
+            "text": {
+              "maxLength": 4000,
+              "title": "Text",
+              "type": "string"
+            },
+            "truncated": {
+              "default": false,
+              "title": "Truncated",
+              "type": "boolean"
+            },
+            "url": {
+              "maxLength": 300,
+              "title": "Url",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "url",
+            "text",
+            "author",
+            "observedAt"
+          ],
+          "title": "ResearchPostSnapshot",
+          "type": "object"
+        },
+        "SampleCoverage": {
+          "additionalProperties": false,
+          "description": "The denominators, so no percentage on screen is unattributable.\n\n`collected` is what the browser saw; `relevant` is what survived relevance;\n`classified` is what the classifier actually answered for. They are\ndifferent numbers and a card that shows only the last one is hiding its own\nsample loss.",
+          "properties": {
+            "authors": {
+              "minimum": 0,
+              "title": "Authors",
+              "type": "integer"
+            },
+            "classified": {
+              "minimum": 0,
+              "title": "Classified",
+              "type": "integer"
+            },
+            "collected": {
+              "minimum": 0,
+              "title": "Collected",
+              "type": "integer"
+            },
+            "deduplicated": {
+              "minimum": 0,
+              "title": "Deduplicated",
+              "type": "integer"
+            },
+            "relevant": {
+              "minimum": 0,
+              "title": "Relevant",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "collected",
+            "deduplicated",
+            "relevant",
+            "classified",
+            "authors"
+          ],
+          "title": "SampleCoverage",
+          "type": "object"
+        },
+        "SearchResultsCard": {
+          "additionalProperties": false,
+          "description": "Evidence with no classification yet \u2014 what a bare `search_x` produces.",
+          "properties": {
+            "evidenceId": {
+              "maxLength": 64,
+              "title": "Evidenceid",
+              "type": "string"
+            },
+            "kind": {
+              "const": "search-results",
+              "default": "search-results",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "mode": {
+              "enum": [
+                "latest",
+                "top"
+              ],
+              "title": "Mode",
+              "type": "string"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "posts": {
+              "items": {
+                "$ref": "#/$defs/ResearchPostSnapshot"
+              },
+              "maxItems": 40,
+              "title": "Posts",
+              "type": "array"
+            },
+            "query": {
+              "maxLength": 256,
+              "title": "Query",
+              "type": "string"
+            },
+            "sample": {
+              "$ref": "#/$defs/SampleCoverage"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            },
+            "window": {
+              "$ref": "#/$defs/ObservationWindow"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "evidenceId",
+            "query",
+            "mode",
+            "window",
+            "sample"
+          ],
+          "title": "SearchResultsCard",
+          "type": "object"
+        },
+        "SentimentCard": {
+          "additionalProperties": false,
+          "description": "The same evidence, once a stance is attached to each post.\n\nUpserted onto the search card's part ID rather than appended beside it: two\ncards listing the same forty posts is the panel arguing with itself.",
+          "properties": {
+            "annotations": {
+              "items": {
+                "$ref": "#/$defs/StanceAnnotation"
+              },
+              "maxItems": 40,
+              "title": "Annotations",
+              "type": "array"
+            },
+            "counts": {
+              "$ref": "#/$defs/StanceCounts"
+            },
+            "evidenceId": {
+              "maxLength": 64,
+              "title": "Evidenceid",
+              "type": "string"
+            },
+            "kind": {
+              "const": "sentiment",
+              "default": "sentiment",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "mode": {
+              "enum": [
+                "latest",
+                "top"
+              ],
+              "title": "Mode",
+              "type": "string"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "posts": {
+              "items": {
+                "$ref": "#/$defs/ResearchPostSnapshot"
+              },
+              "maxItems": 40,
+              "title": "Posts",
+              "type": "array"
+            },
+            "query": {
+              "maxLength": 256,
+              "title": "Query",
+              "type": "string"
+            },
+            "sample": {
+              "$ref": "#/$defs/SampleCoverage"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            },
+            "window": {
+              "$ref": "#/$defs/ObservationWindow"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "evidenceId",
+            "query",
+            "mode",
+            "window",
+            "sample",
+            "counts"
+          ],
+          "title": "SentimentCard",
+          "type": "object"
+        },
+        "StanceAnnotation": {
+          "additionalProperties": false,
+          "description": "One classifier answer, attributable.\n\n`confidence` is the classifier's own score and is documented as such\nwherever it is shown. It is not a calibrated probability and must not be\npresented as one until there is an evaluation that says it is.",
+          "properties": {
+            "confidence": {
+              "anyOf": [
+                {
+                  "maximum": 1.0,
+                  "minimum": 0.0,
+                  "type": "number"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Confidence"
+            },
+            "evidenceSpan": {
+              "anyOf": [
+                {
+                  "maxLength": 400,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Evidencespan"
+            },
+            "explanation": {
+              "anyOf": [
+                {
+                  "maxLength": 400,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Explanation"
+            },
+            "methodVersion": {
+              "maxLength": 32,
+              "title": "Methodversion",
+              "type": "string"
+            },
+            "model": {
+              "maxLength": 64,
+              "title": "Model",
+              "type": "string"
+            },
+            "postId": {
+              "maxLength": 40,
+              "title": "Postid",
+              "type": "string"
+            },
+            "stance": {
+              "enum": [
+                "bullish",
+                "bearish",
+                "neutral",
+                "mixed",
+                "uncertain",
+                "unclassified"
+              ],
+              "title": "Stance",
+              "type": "string"
+            },
+            "subject": {
+              "maxLength": 120,
+              "title": "Subject",
+              "type": "string"
+            }
+          },
+          "required": [
+            "postId",
+            "stance",
+            "subject",
+            "model",
+            "methodVersion"
+          ],
+          "title": "StanceAnnotation",
+          "type": "object"
+        },
+        "StanceCounts": {
+          "additionalProperties": false,
+          "properties": {
+            "bearish": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Bearish",
+              "type": "integer"
+            },
+            "bullish": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Bullish",
+              "type": "integer"
+            },
+            "mixed": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Mixed",
+              "type": "integer"
+            },
+            "neutral": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Neutral",
+              "type": "integer"
+            },
+            "uncertain": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Uncertain",
+              "type": "integer"
+            },
+            "unclassified": {
+              "default": 0,
+              "minimum": 0,
+              "title": "Unclassified",
+              "type": "integer"
+            }
+          },
+          "title": "StanceCounts",
+          "type": "object"
+        },
+        "Subject": {
+          "additionalProperties": false,
+          "description": "What a card is about. Never inferred by the renderer.",
+          "properties": {
+            "chain": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Chain"
+            },
+            "companyName": {
+              "anyOf": [
+                {
+                  "maxLength": 120,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Companyname"
+            },
+            "ticker": {
+              "maxLength": 16,
+              "title": "Ticker",
+              "type": "string"
+            },
+            "venue": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Venue"
+            }
+          },
+          "required": [
+            "ticker"
+          ],
+          "title": "Subject",
+          "type": "object"
+        },
+        "TradeAnalysisCard": {
+          "additionalProperties": false,
+          "description": "The answer to \"should I buy, sell or hold?\": signals, risks, and a split.\n\nThe split is computed by `app.research.trade_analysis` from the signals on\nthis card and nothing else. It is the field a reader is most likely to act\non and the one a model would most like to write, which is why it is checked\nhere and again on the client: `lean` has to be the largest share, Hold\nwinning a tie, or the card is refused.\n\nThe disclaimer is not in the payload. It lives in the panel, so no model\noutput can shorten it or leave it off.",
+          "properties": {
+            "chain": {
+              "enum": [
+                "bnb",
+                "solana"
+              ],
+              "title": "Chain",
+              "type": "string"
+            },
+            "confidence": {
+              "enum": [
+                "low",
+                "moderate",
+                "high"
+              ],
+              "title": "Confidence",
+              "type": "string"
+            },
+            "held": {
+              "default": false,
+              "title": "Held",
+              "type": "boolean"
+            },
+            "kind": {
+              "const": "trade-analysis",
+              "default": "trade-analysis",
+              "title": "Kind",
+              "type": "string"
+            },
+            "lean": {
+              "enum": [
+                "buy",
+                "hold",
+                "sell"
+              ],
+              "title": "Lean",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "marketSession": {
+              "anyOf": [
+                {
+                  "maxLength": 32,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Marketsession"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "position": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/AnalysisPosition"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "price": {
+              "anyOf": [
+                {
+                  "$ref": "#/$defs/PriceReading"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "risks": {
+              "items": {
+                "$ref": "#/$defs/AnalysisRisk"
+              },
+              "maxItems": 5,
+              "title": "Risks",
+              "type": "array"
+            },
+            "signals": {
+              "items": {
+                "$ref": "#/$defs/AnalysisSignal"
+              },
+              "maxItems": 5,
+              "title": "Signals",
+              "type": "array"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "split": {
+              "$ref": "#/$defs/AnalysisSplit"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "symbol": {
+              "maxLength": 16,
+              "title": "Symbol",
+              "type": "string"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "symbol",
+            "chain",
+            "split",
+            "lean",
+            "confidence"
+          ],
+          "title": "TradeAnalysisCard",
+          "type": "object"
+        },
+        "TradeIntentCard": {
+          "additionalProperties": false,
+          "description": "A trade the user asked for, priced at the moment they asked. Never a suggestion.\n\nIt carries a price and a conversion because that is the question behind\n\"buy $100 of NVDAon\" \u2014 how much do I get. What it must not do is let that\nfigure be mistaken for the fill: prices move between the model writing this\nand the user reading it, so the price is stamped with `quotedAt` and the\ncard says it is indicative.\n\nConfirm opens the buy screen with the amount prefilled. That screen fetches\nits own live quote, shows the route and the minimum received, and hands the\ntransaction to the wallet. Nothing here signs anything.\n\nThat is also what keeps it safe to render from a model that reads untrusted\nposts: the worst an injected \"buy $5000 of X\" can do is show a card the user\ndid not ask for, which they decline by not pressing a button.",
+          "properties": {
+            "amount": {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "title": "Amount",
+              "type": "string"
+            },
+            "chain": {
+              "enum": [
+                "bnb",
+                "solana"
+              ],
+              "title": "Chain",
+              "type": "string"
+            },
+            "estimatedAmount": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Estimatedamount"
+            },
+            "kind": {
+              "const": "trade-intent",
+              "default": "trade-intent",
+              "title": "Kind",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "observedAt": {
+              "format": "date-time",
+              "title": "Observedat",
+              "type": "string"
+            },
+            "payToken": {
+              "maxLength": 8,
+              "title": "Paytoken",
+              "type": "string"
+            },
+            "priceUsd": {
+              "anyOf": [
+                {
+                  "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Priceusd"
+            },
+            "quotedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Quotedat"
+            },
+            "side": {
+              "enum": [
+                "buy",
+                "sell"
+              ],
+              "title": "Side",
+              "type": "string"
+            },
+            "sourceIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 64,
+              "title": "Sourceids",
+              "type": "array"
+            },
+            "sourceToolCallIds": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 8,
+              "title": "Sourcetoolcallids",
+              "type": "array"
+            },
+            "status": {
+              "default": "complete",
+              "enum": [
+                "complete",
+                "partial",
+                "unavailable"
+              ],
+              "title": "Status",
+              "type": "string"
+            },
+            "subject": {
+              "$ref": "#/$defs/Subject"
+            },
+            "symbol": {
+              "maxLength": 16,
+              "title": "Symbol",
+              "type": "string"
+            },
+            "title": {
+              "maxLength": 120,
+              "title": "Title",
+              "type": "string"
+            },
+            "venueLabel": {
+              "maxLength": 48,
+              "title": "Venuelabel",
+              "type": "string"
+            },
+            "version": {
+              "const": 1,
+              "default": 1,
+              "title": "Version",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "title",
+            "subject",
+            "observedAt",
+            "side",
+            "symbol",
+            "chain",
+            "venueLabel",
+            "amount",
+            "payToken"
+          ],
+          "title": "TradeIntentCard",
+          "type": "object"
+        }
+      },
+      "discriminator": {
+        "mapping": {
+          "backing": "#/$defs/BackingCard",
+          "claim-check": "#/$defs/ClaimCheckCard",
+          "issuer-comparison": "#/$defs/IssuerComparisonCard",
+          "market-snapshot": "#/$defs/MarketSnapshotCard",
+          "markets": "#/$defs/MarketsCard",
+          "portfolio": "#/$defs/PortfolioCard",
+          "price-chart": "#/$defs/PriceChartCard",
+          "search-results": "#/$defs/SearchResultsCard",
+          "sentiment": "#/$defs/SentimentCard",
+          "trade-analysis": "#/$defs/TradeAnalysisCard",
+          "trade-intent": "#/$defs/TradeIntentCard"
+        },
+        "propertyName": "kind"
+      },
+      "oneOf": [
+        {
+          "$ref": "#/$defs/SearchResultsCard"
+        },
+        {
+          "$ref": "#/$defs/SentimentCard"
+        },
+        {
+          "$ref": "#/$defs/MarketSnapshotCard"
+        },
+        {
+          "$ref": "#/$defs/MarketsCard"
+        },
+        {
+          "$ref": "#/$defs/PortfolioCard"
+        },
+        {
+          "$ref": "#/$defs/PriceChartCard"
+        },
+        {
+          "$ref": "#/$defs/TradeIntentCard"
+        },
+        {
+          "$ref": "#/$defs/IssuerComparisonCard"
+        },
+        {
+          "$ref": "#/$defs/BackingCard"
+        },
+        {
+          "$ref": "#/$defs/ClaimCheckCard"
+        },
+        {
+          "$ref": "#/$defs/TradeAnalysisCard"
+        }
+      ]
+    },
+    "ResearchPostSnapshot": {
+      "$defs": {
+        "PostAuthorSnapshot": {
+          "additionalProperties": false,
+          "properties": {
+            "avatarUrl": {
+              "anyOf": [
+                {
+                  "maxLength": 400,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Avatarurl"
+            },
+            "followers": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Followers"
+            },
+            "handle": {
+              "maxLength": 64,
+              "title": "Handle",
+              "type": "string"
+            },
+            "name": {
+              "default": "",
+              "maxLength": 120,
+              "title": "Name",
+              "type": "string"
+            },
+            "verified": {
+              "default": false,
+              "title": "Verified",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "handle"
+          ],
+          "title": "PostAuthorSnapshot",
+          "type": "object"
+        },
+        "PostEngagementSnapshot": {
+          "additionalProperties": false,
+          "description": "What the collector actually observed, at the moment it looked.\n\nEvery field is optional because X renders these inconsistently and a\ncollector that scrolled past a post without reading its counts has seen\nnothing, not zero.",
+          "properties": {
+            "likes": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Likes"
+            },
+            "observedAt": {
+              "anyOf": [
+                {
+                  "format": "date-time",
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Observedat"
+            },
+            "replies": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Replies"
+            },
+            "reposts": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Reposts"
+            },
+            "views": {
+              "anyOf": [
+                {
+                  "type": "integer"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Views"
+            }
+          },
+          "title": "PostEngagementSnapshot",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "description": "One post, stored well enough to re-render it after a reload.\n\nThe snapshot carries the post text itself instead of a pointer into a tool\nresult. Nothing in this extension keeps tool outputs on the client, so a\npointer would render an empty card the moment the panel reopened. The text\ntravels.",
+      "properties": {
+        "author": {
+          "$ref": "#/$defs/PostAuthorSnapshot"
+        },
+        "engagement": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PostEngagementSnapshot"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "id": {
+          "maxLength": 40,
+          "title": "Id",
+          "type": "string"
+        },
+        "observedAt": {
+          "format": "date-time",
+          "title": "Observedat",
+          "type": "string"
+        },
+        "publishedAt": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Publishedat"
+        },
+        "quotedPostId": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Quotedpostid"
+        },
+        "repostedPostId": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Repostedpostid"
+        },
+        "sourceId": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sourceid"
+        },
+        "text": {
+          "maxLength": 4000,
+          "title": "Text",
+          "type": "string"
+        },
+        "truncated": {
+          "default": false,
+          "title": "Truncated",
+          "type": "boolean"
+        },
+        "url": {
+          "maxLength": 300,
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "url",
+        "text",
+        "author",
+        "observedAt"
+      ],
+      "title": "ResearchPostSnapshot",
+      "type": "object"
+    },
+    "ResearchUIMessage": {
+      "$defs": {
+        "Citation": {
+          "additionalProperties": false,
+          "description": "A source the server resolved, never one the model wrote.\n\nDefined here rather than in `schemas.py` so that the UI message \u2014 which\ncarries a list of these \u2014 can live alongside the card schemas without the\ntwo modules importing each other. `schemas.py` re-exports it, so every\nexisting call site is unchanged.",
+          "properties": {
+            "kind": {
+              "enum": [
+                "x_post",
+                "market_data",
+                "issuer_data"
+              ],
+              "title": "Kind",
+              "type": "string"
+            },
+            "observed_at": {
+              "format": "date-time",
+              "title": "Observed At",
+              "type": "string"
+            },
+            "source_id": {
+              "title": "Source Id",
+              "type": "string"
+            },
+            "title": {
+              "title": "Title",
+              "type": "string"
+            },
+            "url": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Url"
+            }
+          },
+          "required": [
+            "source_id",
+            "kind",
+            "title",
+            "observed_at"
+          ],
+          "title": "Citation",
+          "type": "object"
+        },
+        "UIMessageMetadata": {
+          "additionalProperties": false,
+          "properties": {
+            "citations": {
+              "items": {
+                "$ref": "#/$defs/Citation"
+              },
+              "maxItems": 40,
+              "title": "Citations",
+              "type": "array"
+            },
+            "createdAt": {
+              "format": "date-time",
+              "title": "Createdat",
+              "type": "string"
+            },
+            "limitations": {
+              "items": {
+                "type": "string"
+              },
+              "maxItems": 12,
+              "title": "Limitations",
+              "type": "array"
+            },
+            "runId": {
+              "title": "Runid",
+              "type": "string"
+            },
+            "schemaVersion": {
+              "const": 1,
+              "default": 1,
+              "title": "Schemaversion",
+              "type": "integer"
+            },
+            "status": {
+              "enum": [
+                "pending",
+                "complete",
+                "cancelled",
+                "interrupted",
+                "error"
+              ],
+              "title": "Status",
+              "type": "string"
+            }
+          },
+          "required": [
+            "runId",
+            "createdAt",
+            "status"
+          ],
+          "title": "UIMessageMetadata",
+          "type": "object"
+        },
+        "UIPart": {
+          "additionalProperties": false,
+          "description": "One part of an assistant message, in the SDK's `data-*` shape.\n\n`type` and `id` are the SDK's envelope; `data` is ours and has already been\nvalidated by the domain schema above before it is put here. The union is\nnot re-declared in Python because the client validates each payload against\nthe generated schema for its `type` \u2014 declaring it in two places is how the\ntwo drift apart.",
+          "properties": {
+            "data": {
+              "default": null,
+              "title": "Data"
+            },
+            "id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Id"
+            },
+            "text": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Text"
+            },
+            "type": {
+              "title": "Type",
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ],
+          "title": "UIPart",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "#/$defs/UIMessageMetadata"
+        },
+        "parts": {
+          "items": {
+            "$ref": "#/$defs/UIPart"
+          },
+          "maxItems": 24,
+          "title": "Parts",
+          "type": "array"
+        },
+        "role": {
+          "const": "assistant",
+          "default": "assistant",
+          "title": "Role",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "metadata"
+      ],
+      "title": "ResearchUIMessage",
+      "type": "object"
+    },
+    "StanceAnnotation": {
+      "additionalProperties": false,
+      "description": "One classifier answer, attributable.\n\n`confidence` is the classifier's own score and is documented as such\nwherever it is shown. It is not a calibrated probability and must not be\npresented as one until there is an evaluation that says it is.",
+      "properties": {
+        "confidence": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Confidence"
+        },
+        "evidenceSpan": {
+          "anyOf": [
+            {
+              "maxLength": 400,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Evidencespan"
+        },
+        "explanation": {
+          "anyOf": [
+            {
+              "maxLength": 400,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Explanation"
+        },
+        "methodVersion": {
+          "maxLength": 32,
+          "title": "Methodversion",
+          "type": "string"
+        },
+        "model": {
+          "maxLength": 64,
+          "title": "Model",
+          "type": "string"
+        },
+        "postId": {
+          "maxLength": 40,
+          "title": "Postid",
+          "type": "string"
+        },
+        "stance": {
+          "enum": [
+            "bullish",
+            "bearish",
+            "neutral",
+            "mixed",
+            "uncertain",
+            "unclassified"
+          ],
+          "title": "Stance",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 120,
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "postId",
+        "stance",
+        "subject",
+        "model",
+        "methodVersion"
+      ],
+      "title": "StanceAnnotation",
+      "type": "object"
+    },
+    "VisualizationSpec": {
+      "$defs": {
+        "FlowEdge": {
+          "additionalProperties": false,
+          "properties": {
+            "from": {
+              "maxLength": 64,
+              "title": "From",
+              "type": "string"
+            },
+            "label": {
+              "anyOf": [
+                {
+                  "maxLength": 80,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Label"
+            },
+            "to": {
+              "maxLength": 64,
+              "title": "To",
+              "type": "string"
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "title": "FlowEdge",
+          "type": "object"
+        },
+        "FlowNode": {
+          "additionalProperties": false,
+          "properties": {
+            "description": {
+              "anyOf": [
+                {
+                  "maxLength": 240,
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Description"
+            },
+            "icon": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "user",
+                    "sparkles",
+                    "wrench",
+                    "database",
+                    "globe",
+                    "check"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Icon"
+            },
+            "id": {
+              "maxLength": 64,
+              "pattern": "^[A-Za-z0-9_\\-]+$",
+              "title": "Id",
+              "type": "string"
+            },
+            "label": {
+              "maxLength": 80,
+              "title": "Label",
+              "type": "string"
+            },
+            "variant": {
+              "anyOf": [
+                {
+                  "enum": [
+                    "default",
+                    "primary",
+                    "success",
+                    "warning",
+                    "danger"
+                  ],
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Variant"
+            }
+          },
+          "required": [
+            "id",
+            "label"
+          ],
+          "title": "FlowNode",
+          "type": "object"
+        }
+      },
+      "additionalProperties": false,
+      "description": "A graph the model may describe and may not draw.\n\nThere are no coordinates, no styles, no markup and no URLs in this schema,\nand `extra=\"forbid\"` is what keeps it that way. Dagre decides where things\ngo on the client; the model decides only what is connected to what. A model\nthat could emit layout could emit anything, and \"anything\" rendered inside\nsomebody's X tab is not a feature.",
+      "properties": {
+        "description": {
+          "anyOf": [
+            {
+              "maxLength": 240,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Description"
+        },
+        "direction": {
+          "default": "vertical",
+          "enum": [
+            "horizontal",
+            "vertical"
+          ],
+          "title": "Direction",
+          "type": "string"
+        },
+        "edges": {
+          "items": {
+            "$ref": "#/$defs/FlowEdge"
+          },
+          "maxItems": 24,
+          "title": "Edges",
+          "type": "array"
+        },
+        "nodes": {
+          "items": {
+            "$ref": "#/$defs/FlowNode"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Nodes",
+          "type": "array"
+        },
+        "title": {
+          "maxLength": 120,
+          "title": "Title",
+          "type": "string"
+        },
+        "type": {
+          "const": "flow",
+          "default": "flow",
+          "title": "Type",
+          "type": "string"
+        },
+        "version": {
+          "const": 1,
+          "default": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "title",
+        "nodes"
+      ],
+      "title": "VisualizationSpec",
+      "type": "object"
+    }
+  },
+  "$id": "https://optimai.catalyst/schemas/research-contract/v1",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Generated from server/src/app/agent/presentation_schemas.py. Do not edit by hand; run scripts/export_research_contract.py --write.",
+  "title": "OptimAI Agentic research presentation contract"
+}
